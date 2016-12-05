@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BlockchainHOT.Models.StabilityChartViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Batch-Stability Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StabilityId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Batch.BatchNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromTemp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToTemp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllowedTimeInMinutes)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null) { 
+        foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StabilityId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Batch.BatchNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromTemp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToTemp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowedTimeInMinutes)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.BatchId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.BatchId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.BatchId })
+                </td>
+            </tr>
+        }
+    }
+</table>

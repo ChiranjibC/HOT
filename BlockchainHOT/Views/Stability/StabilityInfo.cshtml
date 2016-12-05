@@ -1,0 +1,97 @@
+﻿@model IEnumerable<BlockChainSI.Models.StabilityChartViewModel>
+
+<div>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+        <h4 class="modal-title" id="myModalLabel">Product Stability Info</h4>
+    </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromTemp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToTemp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllowedTimeInMinutes)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>                        
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FromTemp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToTemp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AllowedTimeInMinutes)
+                        @Html.HiddenFor(modelItem => item.StabilityId)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("-", "Delete", new { id = item.StabilityId })*@
+                        <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@item.StabilityId"> - </a>      
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("+", "Add", new { id = item.StabilityId })*@
+                        <a href="javascript:void(0);" class="addStabilityLink" data-id="@item.StabilityId"> + </a>      
+                    </td>
+                </tr>
+            }
+
+        </table>
+    <div class="panel-footer text-center msgbox hidden">
+    </div>        
+    <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <button type="submit" class="btn-default">Submit</button>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+       $("#btnClose").on("click", function () {
+            $('#myModal').modal('hide');
+       });
+    });
+
+    $(".deleteStabilityLink").click(function () {
+        //debugger;
+        var $buttonClicked = $(this);
+        var id = $buttonClicked.attr('data-id');
+        var stringId = JSON.stringify({'id': id});
+        console.log("JSON.stringify(id)=" + stringId)
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "POST",
+            url: StabilityDeleteURL,
+            contentType: "application/json; charset=utf-8",
+            //contentType: "text/html; charset=utf-8",
+            data: stringId ,
+            //datatype: "html",
+            success: function (data) {
+                //debugger;
+                //$('#myModalContent').html(data);
+                //$('#myModal').modal(options);
+                $('#msgbox').show();
+                $($buttonClicked).closest("tr").remove();
+                //setTimeout($('#msgbox').hide(), 3000);
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+            }
+        });
+    });
+</script>

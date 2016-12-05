@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BlockChainSI.Models.DeviceViewModel>
+
+@{
+    ViewBag.Title = "Device";
+}
+
+<h2>Device Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceFamily.DeviceFamilyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogInterval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null) { 
+        foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceFamily.DeviceFamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInterval)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.DeviceId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.DeviceId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.DeviceId })
+                </td>
+            </tr>
+        }
+    }
+</table>

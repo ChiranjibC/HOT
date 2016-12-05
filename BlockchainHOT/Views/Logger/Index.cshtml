@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BlockChainSI.Models.LoggerViewModel>
+
+@{
+    ViewBag.Title = "Log";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Temperature Log</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecordDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeviceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TemperatureRange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationInMins)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TemperatureRange)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationInMins)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LoggerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LoggerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LoggerId })
+        </td>
+    </tr>
+}
+
+</table>

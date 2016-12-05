@@ -1,0 +1,84 @@
+﻿@model BlockchainHOT.Models.DeviceViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Create Device</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DeviceId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeviceId)
+                @Html.ValidationMessageFor(model => model.DeviceId)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeviceNo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeviceNo)
+                @Html.ValidationMessageFor(model => model.DeviceNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeviceFamily, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    var listDeviceFamily = new List<SelectListItem> { new SelectListItem { Value="Max_Inn_N_v1.34", Text="MSTENT" }, new SelectListItem { Value="Max_Inn_XX_v2.0", Text="DSTENT" }, new SelectListItem { Value="Max_Inn_N_v1.34", Text = "CSTENT" } };
+                }
+                @Html.DropDownListFor(model => model.DeviceFamily, listDeviceFamily)
+                @Html.ValidationMessageFor(model => model.DeviceName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeviceName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeviceName)
+                @Html.ValidationMessageFor(model => model.DeviceName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LogInterval, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LogInterval)
+                @Html.ValidationMessageFor(model => model.LogInterval)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

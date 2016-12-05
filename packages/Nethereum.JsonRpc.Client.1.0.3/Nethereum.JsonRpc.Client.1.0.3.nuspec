@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Nethereum.JsonRpc.Client</id>
+    <version>1.0.3</version>
+    <title>Nethereum.JsonRpc.Client</title>
+    <authors>Juan Blanco</authors>
+    <owners>Juan Blanco</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Nethereum/Nethereum/master/LICENSE.md</licenseUrl>
+    <projectUrl>http://www.nethereum.com/</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Nethereum/Nethereum/master/logos/logo64x64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>JsonRpc.Client wrapper of Edjcase.JsonRpc.Client specific to Nethereum and additions to provide a generic inteface which can be switched with IPC, request and response handlers</description>
+    <summary>JsonRpc.Client wrapper of Edjcase.JsonRpc.Client specific to Nethereum and additions to provide a generic inteface which can be switched with IPC, request and response handlers</summary>
+    <copyright>Juan Blanco</copyright>
+    <tags>Json RPC</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.1">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="EdjCase.JsonRpc.Client" version="1.0.5" />
+      </group>
+      <group targetFramework=".NETPortable4.5-net45+win8+wpa81">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="EdjCase.JsonRpc.Client" version="1.0.5" />
+      </group>
+      <group targetFramework="Unsupported0.0">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="EdjCase.JsonRpc.Client" version="1.0.5" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

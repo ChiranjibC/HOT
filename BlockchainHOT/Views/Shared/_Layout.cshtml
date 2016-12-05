@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Handling of Temperature Excursion</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("HOT", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>                    
+                    <li>@Html.ActionLink("Device", "Index", "Device")</li>
+                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
+                    <li>@Html.ActionLink("Batch", "Index", "Batch")</li>                    
+                    <li>@Html.ActionLink("Mapper", "Index", "Mapper")</li>
+                    <li>@Html.ActionLink("Logger", "Index", "Logger")</li>                    
+                    <li>@Html.ActionLink("Batch Info", "BatchInfo", "Batch")</li>   
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Handling of Temperature Excursion</p>
+        </footer>
+    </div>
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div> 
+    <script language="JavaScript" type="text/javascript">
+        var StabilityDetailURL = '@Url.Action("StabilityInfo", "Stability")'
+        var StabilityDeleteURL = '@Url.Action("Delete", "Stability")'
+        var StabilitySaveURL = '@Url.Action("Add", "Stability")'
+        var ProductSaveURL = '@Url.Action("Edit", "Product")'
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqgrid")
+    @Scripts.Render("~/bundles/sitejs")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

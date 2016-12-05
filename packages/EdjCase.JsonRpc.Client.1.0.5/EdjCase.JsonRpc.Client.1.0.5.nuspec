@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>EdjCase.JsonRpc.Client</id>
+    <version>1.0.5</version>
+    <title>EdjCase.JsonRpc.Client</title>
+    <authors>Gekctek</authors>
+    <owners>Gekctek</owners>
+    <licenseUrl>https://raw.githubusercontent.com/edjCase/JsonRpc/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/edjCase/JsonRpc</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .Net Core Client implementation for Json Rpc v2 requests.</description>
+    <summary>A Json RPC v2 client for .Net Core</summary>
+    <releaseNotes>Adding pcl target.</releaseNotes>
+    <tags>JsonRpc Rpc Json-Rpc .Net Core</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.1">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="EdjCase.JsonRpc.Core" version="1.0.4" />
+        <dependency id="System.Net.Http" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETPortable4.5-net45+win8+wpa81">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="EdjCase.JsonRpc.Core" version="1.0.4" />
+        <dependency id="System.Net.Http" version="4.1.0" />
+      </group>
+      <group targetFramework="Unsupported0.0">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="EdjCase.JsonRpc.Core" version="1.0.4" />
+        <dependency id="System.Net.Http" version="4.1.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

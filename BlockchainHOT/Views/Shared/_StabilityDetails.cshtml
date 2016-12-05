@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BlockchainHOT.Models.StabilityChartViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FromTemp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToTemp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllowedTimeInMinutes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromTemp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToTemp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllowedTimeInMinutes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StabilityId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StabilityId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StabilityId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BlockChainSI.Models.ProductViewModel>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product</h2>
+
+<p>
+    <a href="javascript:void(0);" class="productEditLink">Create New</a> 
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDesc)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDesc)
+        </td>
+        <td>
+            <a href="javascript:void(0);" class="productEditLink" data-id="@item.ProductId">Edit</a>  |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+        </td>
+        <td>
+            <a href="javascript:void(0);" class="stabilityLink badge" data-id="@item.ProductId">Stability Details</a>  
+        </td>
+    </tr>
+}
+</table>

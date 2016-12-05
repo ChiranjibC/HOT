@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BlockChainSI.Models.BatchViewModel>
+
+@{
+    ViewBag.Title = "Batch";
+}
+
+<h2>Batch Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BatchId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BatchId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BatchId })
+                </td>
+            </tr>           
+        }
+    }
+</table>
