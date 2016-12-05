@@ -17,6 +17,20 @@ namespace BlockChainSI.Mock
             device.DeviceId = Guid.NewGuid();
             return device;
         }
+        
+        public DeviceViewModel GetDetails(Guid id)
+        {
+            return new DeviceViewModel()
+            {
+                Description = "Device details_" + GetRand(),
+                DeviceFamily = GetDeviceFamily(),
+                DeviceId = id,
+                DeviceName = "DeviceName_" + GetRand(),
+                DeviceNo = "DeviceNo_" + GetRand(),
+                LogInterval = 15,
+            };
+        }
+
         private IEnumerable<DeviceViewModel> GetDeviceList(int count)
         {
             var deviceLists = new List<DeviceViewModel>();
@@ -49,7 +63,7 @@ namespace BlockChainSI.Mock
                 DeviceFamilyId = Guid.NewGuid(),
                 DeviceFamilyNo = "Max_Inn_N_v1.34",
             };
-        }        
+        }
 
     }
 }

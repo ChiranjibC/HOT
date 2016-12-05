@@ -12,5 +12,6 @@ namespace BlockChainSI.Contracts
         IEnumerable<LoggerViewModel> GetLogList(int pageSize, int pageNo);
         LoggerViewModel UpdateLogItem(LoggerViewModel logItem);
         bool UpdateLogList(IList<LoggerViewModel> logList);
+        LoggerViewModel GetDetails(Guid id);
     }
 }

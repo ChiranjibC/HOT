@@ -334,6 +334,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SiteJS\BatchStability.js" />
+    <Content Include="Scripts\SiteJS\partial\CommonPartial.js" />
     <Content Include="Scripts\SiteJS\DeviceStability.js" />
     <Content Include="Scripts\SiteJS\Common.js" />
     <Content Include="Scripts\SiteJS\ProductAddEdit.js" />
@@ -364,17 +365,19 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Device\Create.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Batch\Index.cshtml" />
     <Content Include="Views\Stability\Index.cshtml" />
     <Content Include="Views\Shared\_StabilityDetails.cshtml" />
-    <Content Include="Views\Batch\Index - Copy.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Mapper\Index.cshtml" />
     <Content Include="Views\Logger\Index.cshtml" />
     <Content Include="Views\Stability\StabilityInfo.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Device\Edit.cshtml" />
+    <Content Include="Views\Batch\Edit.cshtml" />
+    <Content Include="Views\Mapper\Edit.cshtml" />
+    <Content Include="Views\Logger\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

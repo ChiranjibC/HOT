@@ -8,7 +8,7 @@
 <h2>Temperature Log</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Logger")">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -54,9 +54,8 @@
             @Html.DisplayFor(modelItem => item.DurationInMins)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LoggerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LoggerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LoggerId })
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Logger")" data-id="@item.LoggerId">Edit</a>  |
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "Logger")" data-id="@item.LoggerId">Delete</a>
         </td>
     </tr>
 }

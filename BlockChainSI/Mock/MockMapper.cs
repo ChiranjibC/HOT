@@ -21,21 +21,27 @@ namespace BlockChainSI.Mock
             mapper.MapId = Guid.NewGuid();
             return mapper;
         }
-        
+
+        public MapperViewModel GetDetails(Guid id)
+        {
+            return GetMapperItem(id);
+        }
+
         private IEnumerable<MapperViewModel> GetMapList(int count)
         {
             var batchLists = new List<MapperViewModel>();
             for (int i = 0; i < count; i++)
             {
-                batchLists.Add(GetMapperItem());
+                batchLists.Add(GetMapperItem(Guid.NewGuid()));
             }
             return batchLists;
         }
 
-        private MapperViewModel GetMapperItem()
+        private MapperViewModel GetMapperItem(Guid guid)
         {
             var batch = new MapperViewModel()
             {
+                MapId = guid,
                 DeviceNo = "DeviceNo_" + GetRand(),
                 BatchNumber = "BatchNumber_" + GetRand(),
                 StartTime = DateTime.Now.AddDays(-1 * GetRandInt()),

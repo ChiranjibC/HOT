@@ -61,25 +61,21 @@ namespace BlockchainHOT.Controllers
 
         //
         // GET: /Batch/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            Guid guid = Guid.Empty;
+            Guid.TryParse(id, out guid);
+            var device = guid != Guid.Empty ? _logger.GetDetails(guid) : new LoggerViewModel();
+            return PartialView(device);
         }
 
-        //
-        // POST: /Batch/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, LoggerViewModel loggerViewModel)
+        public ActionResult Edit(LoggerViewModel loggerViewModel)
         {
             try
             {
-                // TODO: Add update logic here
-                if (string.IsNullOrEmpty(loggerViewModel.BatchNumber))
-                {
-                    return RedirectToAction("Index");
-                }
-                var updatedBatch = _logger.UpdateLogItem(loggerViewModel);
-                return Json(new { Success = true, updatedBatch.LoggerId });
+                var updatedLogItem = _logger.UpdateLogItem(loggerViewModel);
+                return Json(new { Success = true, updatedLogItem.LoggerId });
             }
             catch
             {

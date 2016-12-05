@@ -62,9 +62,12 @@ namespace BlockchainHOT.Controllers
 
         //
         // GET: /Batch/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            Guid guid = Guid.Empty;
+            Guid.TryParse(id, out guid);
+            var device = guid != Guid.Empty ? _mapper.GetDetails(guid) : new MapperViewModel();
+            return PartialView(device);
         }
 
         //
@@ -74,13 +77,8 @@ namespace BlockchainHOT.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-                if (string.IsNullOrEmpty(mapperViewModel.BatchNumber))
-                {
-                    return RedirectToAction("Index");
-                }
-                var updatedBatch = _mapper.UpdateMapItem(mapperViewModel);
-                return Json(new { Success = true, updatedBatch.MapId });
+                var updatedMapItem = _mapper.UpdateMapItem(mapperViewModel);
+                return Json(new { Success = true, updatedMapItem.MapId });
             }
             catch
             {

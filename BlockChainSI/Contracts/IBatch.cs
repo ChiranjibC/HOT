@@ -11,5 +11,6 @@ namespace BlockChainSI.Contracts
     {
         IEnumerable<BatchViewModel> GetBatchItems(int pageSize, int pageNo);
         BatchViewModel UpdateBatch(BatchViewModel batch);
+        BatchViewModel GetDetails(Guid id);
     }
 }

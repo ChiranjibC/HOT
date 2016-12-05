@@ -8,7 +8,7 @@
 <h2>Batch to Device Mapping</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Mapper")">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -36,8 +36,8 @@
             @Html.DisplayFor(modelItem => item.StartTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MapId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MapId })
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Mapper")" data-id="@item.MapId">Edit</a>  |
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "Mapper")" data-id="@item.MapId">Delete</a>
         </td>
     </tr>
 }

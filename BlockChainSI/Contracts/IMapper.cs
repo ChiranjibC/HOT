@@ -11,5 +11,6 @@ namespace BlockChainSI.Contracts
     {
         IEnumerable<MapperViewModel> GetMapList(int pageSize, int pageNo);
         MapperViewModel UpdateMapItem(MapperViewModel batch);
+        MapperViewModel GetDetails(Guid id);
     }
 }

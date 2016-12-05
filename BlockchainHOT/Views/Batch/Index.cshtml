@@ -7,7 +7,7 @@
 <h2>Batch Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Batch")">Create New</a>
 </p>
 
 
@@ -45,9 +45,8 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.BatchId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.BatchId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BatchId })
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "batch")" data-id="@item.BatchId">Edit</a>  |
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "batch")" data-id="@item.BatchId">Delete</a>
                 </td>
             </tr>           
         }

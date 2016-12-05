@@ -7,7 +7,7 @@
 <h2>Device Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "device")">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,8 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.DeviceId }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.DeviceId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.DeviceId })
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "device")" data-id="@item.DeviceId">Edit</a>  |                    
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "device")" data-id="@item.DeviceId">Delete</a>
                 </td>
             </tr>
         }

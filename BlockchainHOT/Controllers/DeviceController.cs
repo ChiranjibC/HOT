@@ -1,5 +1,6 @@
 ﻿using BlockchainHOT.Models;
 using BlockChainSI.Contracts;
+using BlockChainSI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,21 +63,27 @@ namespace BlockchainHOT.Controllers
 
         //
         // GET: /Device/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            Guid guid = Guid.Empty;
+            Guid.TryParse(id, out guid);
+            var device = guid != Guid.Empty ? _device.GetDetails(guid) : new DeviceViewModel();
+            return PartialView(device);
         }
 
         //
         // POST: /Device/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(DeviceViewModel device)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var updatedDevice = _device.UpdateDevice(device);
+                if (updatedDevice.DeviceId != Guid.Empty)
+                {
+                    return RedirectToAction("Index");
+                }
+                return Json(new { status = "Error" });
             }
             catch
             {

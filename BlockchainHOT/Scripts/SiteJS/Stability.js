@@ -9,7 +9,7 @@
             url: StabilityDetailURL,
             //contentType: "application/json; charset=utf-8",
             contentType: "text/html; charset=utf-8",
-            data: { "Id": JSON.stringify(id) },
+            data: { "Id": id },
             //datatype: "json",
             success: function (data) {
                 //debugger;

@@ -20,6 +20,11 @@ namespace BlockChainSI.Mock
             batch.BatchId = Guid.NewGuid();
             return batch;
         }
+        
+        public BatchViewModel GetDetails(Guid id)
+        {
+            return GetBatch();
+        }
 
         private IEnumerable<BatchViewModel> GetBatchItems(int count)
         {

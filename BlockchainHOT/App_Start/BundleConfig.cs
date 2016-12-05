@@ -41,6 +41,9 @@ namespace BlockchainHOT
 
             bundles.Add(new ScriptBundle("~/bundles/sitejs").Include(                        
                         "~/Scripts/sitejs/*.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/partialjs").Include(
+                        "~/Scripts/sitejs/partial/*.js"));
         }
     }
 }

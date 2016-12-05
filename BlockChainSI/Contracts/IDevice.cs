@@ -11,5 +11,6 @@ namespace BlockChainSI.Contracts
     {
         IEnumerable<DeviceViewModel> GetDeviceList(int pageSize, int pageNo);
         DeviceViewModel UpdateDevice(DeviceViewModel device);
+        DeviceViewModel GetDetails(Guid id);
     }
 }

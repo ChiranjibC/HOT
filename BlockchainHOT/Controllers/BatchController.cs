@@ -62,23 +62,21 @@ namespace BlockchainHOT.Controllers
 
         //
         // GET: /Batch/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            Guid guid = Guid.Empty;
+            Guid.TryParse(id, out guid);
+            var device = guid != Guid.Empty ? _batch.GetDetails(guid) : new BatchViewModel();
+            return PartialView(device);
         }
 
         //
         // POST: /Batch/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, BatchViewModel batchViewModel)
+        public ActionResult Edit(BatchViewModel batchViewModel)
         {
             try
             {
-                // TODO: Add update logic here
-                if (string.IsNullOrEmpty(batchViewModel.BatchDesc))
-                {
-                    return RedirectToAction("Index");
-                }
                 var updatedBatch = _batch.UpdateBatch(batchViewModel);
                 return Json(new { Success = true, updatedBatch.BatchId });
             }

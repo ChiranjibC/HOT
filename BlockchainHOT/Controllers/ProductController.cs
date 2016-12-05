@@ -35,7 +35,7 @@ namespace BlockchainHOT.Controllers
             {
                 productGuid = Guid.NewGuid();
             }
-            //var product = _product.GetProductDetails(productGuid); //TODO:
+            //var product = _product.GetProductDetails(productGuid); //TODO: Get the details for this Id for editing
             return PartialView(new ProductViewModel() { ProductId = productGuid });
         }
 

@@ -25,18 +25,21 @@ namespace BlockChainSI.Mock
         {
             return true;
         }
-
+        public LoggerViewModel GetDetails(Guid id)
+        {
+            return GetLoggerItem(id);
+        }
         private IEnumerable<LoggerViewModel> GetLogList(int count)
         {
             var batchLists = new List<LoggerViewModel>();
             for (int i = 0; i < count; i++)
             {
-                batchLists.Add(GetLoggerItem());
+                batchLists.Add(GetLoggerItem(Guid.NewGuid()));
             }
             return batchLists;
         }
 
-        private LoggerViewModel GetLoggerItem()
+        private LoggerViewModel GetLoggerItem(Guid guid)
         {
             var firstTempRange = GetRandInt();
             var secondTempRange = GetRandInt(firstTempRange, firstTempRange * 10);
@@ -44,7 +47,7 @@ namespace BlockChainSI.Mock
             {
                 DeviceNo = "DeviceNo_" + GetRand(),
                 BatchNumber = "BatchNumber_" + GetRand(),
-                LoggerId = Guid.NewGuid(),
+                LoggerId = guid,
                 DurationInMins = GetRandInt(),
                 Stage = "WareHouse",
                 TemperatureRange = firstTempRange + " - " + secondTempRange,
