@@ -46,5 +46,16 @@ namespace BlockchainHOT.Controllers
             var status = _stability.DeleteStabilityItem(stabilityGuid);
             return Json(new { Status = status ? "Success" : "Error" });
         }
+
+        public ActionResult Save(IList<StabilityChartViewModel> productStability)
+        {
+            Guid stabilityGuid = Guid.Empty;
+            //var status = _stability.UpdateAllProductStability(productStability);
+            //if (status)
+            //{
+            //    return RedirectToAction("index", "product");
+            //}
+            return Json(new { Status = "Error" });
+        }
     }
 }

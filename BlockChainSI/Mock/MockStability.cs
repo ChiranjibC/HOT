@@ -26,6 +26,11 @@ namespace BlockChainSI.Mock
             return stability;
         }
 
+        public bool UpdateAllProductStability(IList<StabilityChartViewModel> productStability)
+        {
+            return true;
+        }
+
         private IEnumerable<StabilityChartViewModel> GetStabilityDetails(Guid productId)
         {
             var stabilityDetails = new List<StabilityChartViewModel>();

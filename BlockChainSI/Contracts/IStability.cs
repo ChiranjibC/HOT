@@ -11,6 +11,8 @@ namespace BlockChainSI.Contracts
     {
         IEnumerable<StabilityChartViewModel> GetProductStabilityDetails(Guid productId);
         StabilityChartViewModel UpdateProductStability(StabilityChartViewModel stability);
+
+        bool UpdateAllProductStability(IList<StabilityChartViewModel> productStability);
         bool DeleteStabilityItem(Guid stabilityId);
     }
 }

@@ -1,70 +1,192 @@
-﻿@model IEnumerable<BlockChainSI.Models.StabilityChartViewModel>
+﻿@model List<BlockChainSI.Models.StabilityChartViewModel>
 
 <div>
-
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
-        <h4 class="modal-title" id="myModalLabel">Product Stability Info</h4>
-    </div>
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FromTemp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ToTemp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AllowedTimeInMinutes)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+    <form action="@Url.Action("Save","Stability")" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Product Stability Info</h4>
+        </div>
+        <div>
+            <table class="table tblStabilityInfo">
                 <tr>
-                    <td>                        
-                        @Html.DisplayFor(modelItem => item.ProductId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FromTemp)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ToTemp)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AllowedTimeInMinutes)
-                        @Html.HiddenFor(modelItem => item.StabilityId)
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("-", "Delete", new { id = item.StabilityId })*@
-                        <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@item.StabilityId"> - </a>      
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("+", "Add", new { id = item.StabilityId })*@
-                        <a href="javascript:void(0);" class="addStabilityLink" data-id="@item.StabilityId"> + </a>      
-                    </td>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.ProductId)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().FromTemp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().ToTemp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().AllowedTimeInMinutes)
+                    </th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            }
 
+                @for (int i = 0; i < Model.Count(); i++)
+            {
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ProductId)
+                            </td>*@
+                        <td>
+                            @Html.TextBoxFor(modelItem => modelItem[i].FromTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => modelItem[i].ToTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => modelItem[i].AllowedTimeInMinutes)
+                            @Html.HiddenFor(modelItem => modelItem[i].StabilityId)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("-", "Delete", new { id = item.StabilityId })*@
+                            <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model[i].StabilityId"> - </a>
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("+", "Add", new { id = item.StabilityId })*@
+                            <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model[i].StabilityId"> + </a>
+                        </td>
+                    </tr>
+                }
+                @*<tr id="templateRowEdit">
+                        @*<td>
+                            @Html.HiddenFor(model => model.DefaultIfEmpty().ProductId)
+                        </td>* @
+                        <td>
+                            @Html.TextBoxFor(model => model.FromTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DefaultIfEmpty().ToTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DefaultIfEmpty().AllowedTimeInMinutes)
+                            @Html.HiddenFor(model => model.DefaultIfEmpty().StabilityId)
+                        </td>
+                        <td>
+                            <button type="submit" class="btn-success">Save</button>
+                            @*<a href="javascript:void(0);" class="saveStabilityLink" data-id="@Model.DefaultIfEmpty().StabilityId">Save</a>* @
+                        </td>
+                        <td>
+                            <button type="button" class="btn-default btnCancel">Cancel</button>
+                            @*<a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.DefaultIfEmpty().StabilityId">Cancel</a>* @
+                        </td>
+                    </tr>
+                    <tr id="templateRowNew">
+                        @*<td>
+                            @Html.HiddenFor(model => model.DefaultIfEmpty().ProductId)
+                        </td>* @
+                        <td>
+                            @Html.DisplayFor(model => model.DefaultIfEmpty().FromTemp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.DefaultIfEmpty().ToTemp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.DefaultIfEmpty().AllowedTimeInMinutes)
+                            @Html.HiddenFor(model => model.DefaultIfEmpty().StabilityId)
+                        </td>
+                        <td>
+                            <button type="submit" class="btn-success btnSave">Save</button>
+                            @*<a href="javascript:void(0);" class="saveStabilityLink" data-id="@Model.DefaultIfEmpty().StabilityId">Save</a>* @
+                        </td>
+                        <td>
+                            <button type="button" class="btn-default btnCancel">Cancel</button>
+                            <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.DefaultIfEmpty().StabilityId">Cancel</a>
+                        </td>
+                    </tr>*@
+            </table>
+        </div>
+        <table class="hidden">
+            <tr id="templateRowEdit">
+                <td>
+                    <input data-val="true" data-val-number="The field From Temperature must be a number."
+                           data-val-required="The From Temperature field is required."
+                           name="[index].FromTemp" type="text" value="">
+                </td>
+                <td>
+                    <input data-val="true" data-val-number="The field To Temperature must be a number."
+                           data-val-required="The To Temperature field is required."
+                           name="[index].ToTemp" type="text" value="">
+                </td>
+                <td>
+                    <input data-val="true" data-val-number="The field Allowed Time in Minutes must be a number."
+                           data-val-required="The Allowed Time in Minutes field is required."
+                           name="[index].AllowedTimeInMinutes" type="text" value="">
+                    <input data-val="true" data-val-required="The StabilityId field is required."
+                           name="[index].StabilityId" type="hidden" value="@Guid.Empty">
+                </td>
+                <td>
+
+                    <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model.FirstOrDefault().ProductId"> - </a>
+                </td>
+                <td>
+
+                    <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.FirstOrDefault().ProductId"> + </a>
+                </td>
+            </tr>
+            @*<tr id="templateRowEdit">
+                    <td>
+                        @Html.TextBoxFor(model => model.FirstOrDefault().FromTemp)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.FirstOrDefault().ToTemp)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.FirstOrDefault().AllowedTimeInMinutes)
+                        @Html.HiddenFor(model => model.FirstOrDefault().StabilityId)
+                        @Html.HiddenFor(model => model.FirstOrDefault().ProductId)
+                    </td>
+                    <td>
+                        <button type="submit" class="btn-success">Save</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn-default btnCancel">Cancel</button>
+                    </td>
+                </tr>*@
         </table>
-    <div class="panel-footer text-center msgbox hidden">
-    </div>        
-    <div class="panel-footer text-center">
+
+        <div class="panel-footer text-center msgbox hidden">
+        </div>
+        <div class="panel-footer text-center">
             <button type="button" id="btnClose">Close</button>
             <button type="submit" class="btn-default">Submit</button>
         </div>
-    </div>
+    </form>
+</div>
 <script>
     $(document).ready(function () {
-       $("#btnClose").on("click", function () {
+        $("#btnClose").on("click", function () {
             $('#myModal').modal('hide');
-       });
+        });
+    });
+
+    $(".addStabilityLink").click(function () {
+        console.log("add new row clicked");
+        var $buttonClicked = $(this);
+        debugger;
+        var lastRowIndex = $("table.tblStabilityInfo tr:last").index();
+        var newRow = $("#templateRowEdit").clone().removeAttr("id");
+        $(newRow).find("input").each(function () {
+            console.log("each tr input");
+            inputName = $(this).attr("name").replace("index", lastRowIndex);
+            $(this).attr("name", inputName);
+        });
+        //newRow = $(newRow).html().replace(/[index]/, '[' + lastRowIndex + ']');
+        $(newRow).appendTo($("#templateRowNew").parent());
+        $(newRow).insertAfter($($buttonClicked).parent().parent());
+
+    });
+
+    $(".btnSave").click(function () {
+        $("#templateRowNew").clone().removeAttr("id").appendTo($("#templateRowNew").parent());                    
+    }); 
+
+    $(".btnCancel").click(function () {
+        var $buttonClicked = $(this);
+        $($buttonClicked).closest("tr").remove();
     });
 
     $(".deleteStabilityLink").click(function () {
