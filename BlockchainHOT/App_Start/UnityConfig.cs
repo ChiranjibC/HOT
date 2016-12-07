@@ -26,6 +26,7 @@ namespace BlockchainHOT
             container.RegisterType<IBatch, MockBatch>();
             container.RegisterType<IMapper, MockMapper>();
             container.RegisterType<ILogger, MockLogger>();
+            container.RegisterType<ITempRange, MockTempRange>();
         }
     }
 }

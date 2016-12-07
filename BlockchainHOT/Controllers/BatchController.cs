@@ -12,17 +12,20 @@ namespace BlockchainHOT.Controllers
     public class BatchController : BaseController
     {
         private IBatch _batch;
-        public BatchController(IBatch batch)
+        private IProduct _product;
+        public BatchController(IBatch batch, IProduct product)
         {
             _batch = batch;
+            _product = product;
         }
         //
         // GET: /Batch/
         public ActionResult Index()
         {
-            return View(_batch.GetBatchItems(15, 2));
+            var batchList = _batch.GetBatchItems(15, 2);
+            PopulateProduct(batchList);
+            return View(batchList);
         }
-
 
         public JsonResult GetBatchItems()
         {
@@ -66,8 +69,29 @@ namespace BlockchainHOT.Controllers
         {
             Guid guid = Guid.Empty;
             Guid.TryParse(id, out guid);
-            var device = guid != Guid.Empty ? _batch.GetDetails(guid) : new BatchViewModel();
-            return PartialView(device);
+            var batch = guid != Guid.Empty ? _batch.GetDetails(guid) : new BatchViewModel();
+            batch.Products = GetProductSelectList();            
+            return PartialView(batch);
+        }
+
+        private SelectList GetProductSelectList()
+        {
+            return new SelectList(_product.GetProducts(10000, 0), "ProductId", "ProductDesc");
+        }
+
+        private IEnumerable<ProductViewModel> GetProducts()
+        {
+            return _product.GetProducts(10000, 0);
+        }
+        
+        private void PopulateProduct(IEnumerable<BatchViewModel> batchList)
+        {
+            var products = GetProducts();
+            foreach (BatchViewModel batch in batchList)
+            {
+                var matchedProduct = products.Where(x => x.ProductId == batch.ProductId).FirstOrDefault();
+                batch.Product = matchedProduct != null ? matchedProduct.ProductDesc : "Temp Entry";
+            }
         }
 
         //

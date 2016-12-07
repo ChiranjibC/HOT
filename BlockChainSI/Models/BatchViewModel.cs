@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BlockChainSI.Models
 {
@@ -23,6 +24,10 @@ namespace BlockChainSI.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Product")]
+        public Guid ProductId { get; set; }
+        
+        [DataType(DataType.Text)]
+        [Display(Name = "Product")]
         public string Product { get; set; }
 
         [Required]
@@ -30,6 +35,7 @@ namespace BlockChainSI.Models
         [Display(Name = "Quantity")]
         public string Quantity { get; set; }
 
-        //public IEnumerable<StabilityChartViewModel> StabilityDetails { get; set; }
+
+        public SelectList Products { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace BlockChainSI.Mock
             return true;
         }
 
-        public IEnumerable<StabilityChartViewModel> GetProductStabilityDetails(Guid productId)
+        public IList<StabilityChartViewModel> GetProductStabilityDetails(Guid productId)
         {
             return GetStabilityDetails(productId);
         }
@@ -30,24 +30,23 @@ namespace BlockChainSI.Mock
         {
             return true;
         }
-
-        private IEnumerable<StabilityChartViewModel> GetStabilityDetails(Guid productId)
+        
+        private IList<StabilityChartViewModel> GetStabilityDetails(Guid productId)
         {
+            var tempRanges = MockTempRange.tempRangeList;
             var stabilityDetails = new List<StabilityChartViewModel>();
             stabilityDetails.Add(new StabilityChartViewModel()
             {
-                AllowedTimeInMinutes = GetRandInt(10),
-                FromTemp = 25,
-                ToTemp = 999,
+                AllowedTimeInMinutes = GetRandInt(10),                
                 StabilityId = Guid.NewGuid(),
                 ProductId = productId,
+                TempRange = tempRanges[0]
             });
 
             stabilityDetails.Add(new StabilityChartViewModel()
             {
                 AllowedTimeInMinutes = GetRandInt(15),
-                FromTemp = 15,
-                ToTemp = 25,
+                TempRange = tempRanges[1],
                 StabilityId = Guid.NewGuid(),
                 ProductId = productId,
             });
@@ -55,38 +54,19 @@ namespace BlockChainSI.Mock
             stabilityDetails.Add(new StabilityChartViewModel()
             {
                 AllowedTimeInMinutes = 0,
-                FromTemp = 9,
-                ToTemp = 15,
+                TempRange = tempRanges[2],
                 StabilityId = Guid.NewGuid(),
                 ProductId = productId,
             });
 
-            stabilityDetails.Add(new StabilityChartViewModel()
-            {
-                AllowedTimeInMinutes = GetRandInt(35),
-                FromTemp = 1,
-                ToTemp = 9,
-                StabilityId = Guid.NewGuid(),
-                ProductId = productId,
-            });
+            //stabilityDetails.Add(new StabilityChartViewModel()
+            //{
+            //    AllowedTimeInMinutes = GetRandInt(35),
+            //    TempRange = tempRanges[3],
+            //    StabilityId = Guid.NewGuid(),
+            //    ProductId = productId,
+            //});
 
-            stabilityDetails.Add(new StabilityChartViewModel()
-            {
-                AllowedTimeInMinutes = GetRandInt(45),
-                FromTemp = 0,
-                ToTemp = 1,
-                StabilityId = Guid.NewGuid(),
-                ProductId = productId,
-            });
-
-            stabilityDetails.Add(new StabilityChartViewModel()
-            {
-                AllowedTimeInMinutes = GetRandInt(15),
-                FromTemp = -999,
-                ToTemp = 0,
-                StabilityId = Guid.NewGuid(),
-                ProductId = productId,
-            });
             return stabilityDetails;
         }
     }

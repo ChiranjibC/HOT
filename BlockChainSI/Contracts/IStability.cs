@@ -9,7 +9,7 @@ namespace BlockChainSI.Contracts
 {
     public interface IStability
     {
-        IEnumerable<StabilityChartViewModel> GetProductStabilityDetails(Guid productId);
+        IList<StabilityChartViewModel> GetProductStabilityDetails(Guid productId);
         StabilityChartViewModel UpdateProductStability(StabilityChartViewModel stability);
 
         bool UpdateAllProductStability(IList<StabilityChartViewModel> productStability);

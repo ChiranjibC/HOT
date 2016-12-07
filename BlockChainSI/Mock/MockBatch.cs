@@ -10,9 +10,22 @@ namespace BlockChainSI.Mock
 {
     public class MockBatch : MockData, IBatch
     {
+        private static List<BatchViewModel> _batchList = null;
+        public static List<BatchViewModel> batchList
+        {
+            get
+            {
+                if (_batchList == null)
+                {
+                    _batchList = GetBatchItems(15).ToList();
+                }
+                return _batchList;
+            }
+        }
+
         public IEnumerable<BatchViewModel> GetBatchItems(int pageSize, int pageNo)
         {
-            return GetBatchItems(pageSize);
+            return batchList;
         }
 
         public BatchViewModel UpdateBatch(BatchViewModel batch)
@@ -23,10 +36,10 @@ namespace BlockChainSI.Mock
         
         public BatchViewModel GetDetails(Guid id)
         {
-            return GetBatch();
+            return batchList.Where(x => x.BatchId == id).FirstOrDefault();
         }
 
-        private IEnumerable<BatchViewModel> GetBatchItems(int count)
+        private static List<BatchViewModel> GetBatchItems(int count)
         {
             var batchLists = new List<BatchViewModel>();
             for (int i = 0; i < count; i++)
@@ -36,14 +49,14 @@ namespace BlockChainSI.Mock
             return batchLists;
         }
 
-        private BatchViewModel GetBatch()
+        private static BatchViewModel GetBatch()
         {
             var batch = new BatchViewModel()
             {
                 BatchDesc = "Batch details_" + GetRand(),
                 BatchId = Guid.NewGuid(),
                 BatchNumber = "BatchNumber_" + GetRand(),
-                Product = "DrugName_" + GetRand(),
+                ProductId = MockProduct.productList[GetRandInt(0, MockProduct.productList.Count -1)].ProductId,
                 Quantity = GetRand(),
 
             };

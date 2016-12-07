@@ -10,18 +10,33 @@ namespace BlockChainSI.Mock
 {
     public class MockProduct : MockData, IProduct
     {
+        private static List<ProductViewModel> _productList = null;
+        public static List<ProductViewModel> productList
+        {
+            get
+            { if (_productList == null)
+                {
+                    _productList = GetProducts(15).ToList();
+                }
+                return _productList;
+            }
+        }
         public IEnumerable<ProductViewModel> GetProducts(int pageSize, int pageNo)
         {
-            return GetProducts(pageSize);
+            return productList;
         }
 
         public ProductViewModel UpdateProduct(ProductViewModel product)
         {
-            product.ProductId = Guid.NewGuid();
+            if(product.ProductId == Guid.Empty)
+            {
+                product.ProductId = Guid.NewGuid();
+                productList.Add(product);
+            }
             return product;
         }
 
-        private IEnumerable<ProductViewModel> GetProducts(int count)
+        private static IEnumerable<ProductViewModel> GetProducts(int count)
         {
             var productLists = new List<ProductViewModel>();
             for (int i = 0; i < count; i++)
@@ -31,7 +46,7 @@ namespace BlockChainSI.Mock
             return productLists;
         }
 
-        private ProductViewModel GetProduct()
+        private static ProductViewModel GetProduct()
         {
             var product = new ProductViewModel()
             {

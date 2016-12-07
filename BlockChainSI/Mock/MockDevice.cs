@@ -7,9 +7,14 @@ namespace BlockChainSI.Mock
 {
     public class MockDevice : MockData, IDevice
     {
+        private static List<DeviceViewModel> deviceList = null;
         public IEnumerable<DeviceViewModel> GetDeviceList(int pageSize, int pageNo)
         {
-            return GetDeviceList(pageSize);
+            if (deviceList == null)
+            {
+                deviceList = GetDeviceList(pageSize);
+            }
+            return deviceList;
         }
 
         public DeviceViewModel UpdateDevice(DeviceViewModel device)
@@ -31,7 +36,7 @@ namespace BlockChainSI.Mock
             };
         }
 
-        private IEnumerable<DeviceViewModel> GetDeviceList(int count)
+        private List<DeviceViewModel> GetDeviceList(int count)
         {
             var deviceLists = new List<DeviceViewModel>();
             for (int i = 0; i < count; i++)
