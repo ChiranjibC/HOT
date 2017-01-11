@@ -1,0 +1,57 @@
+﻿@model BlockChainSI.Models.MapperViewModel
+
+
+@using (Html.BeginForm("Edit", "Device", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Edit - Batch to Device Mapping</h4>
+        </div>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MapId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Batch, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.Batch.BatchId, Model.BatchList, "-- Select --", new { @class = "form-control" })
+                @Html.HiddenFor(model => model.Batch.BatchId)
+                @Html.ValidationMessageFor(model => model.Batch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TempLogger, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.TempLogger.TempLoggerId, Model.DeviceList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TempLogger, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <input type="submit" value="Save" class="btn btn-default saveBtn" />
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/partialjs")

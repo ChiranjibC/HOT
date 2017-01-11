@@ -42,7 +42,7 @@ namespace BlockchainHOT.Controllers
                                                        TempRange = string.Format("{0}: {1}", s.TempRangeCode, s.TempRange)
                                                    }).ToList();
 
-            ViewBag.TempRangesList = new SelectList(selectListTempRanges, "TempRangeId", "TempRange");
+            ViewBag.TempRangeListVB = selectListTempRanges; // new SelectList(selectListTempRanges, "TempRangeId", "TempRange");
             return PartialView(_stability.GetProductStabilityDetails(productGuid));
         }
 
@@ -62,6 +62,7 @@ namespace BlockchainHOT.Controllers
             StabilityListViewModel stabilityList = new StabilityListViewModel();
             stabilityList.StabilityDetails = _stability.GetProductStabilityDetails(productGuid);
             stabilityList.TempRangeList = new SelectList(selectListTempRanges, "TempRangeId", "TempRange");
+            ViewBag.TempRangeListVB = selectListTempRanges;
             return PartialView(stabilityList);
         }
 
@@ -80,6 +81,17 @@ namespace BlockchainHOT.Controllers
         {
             Guid stabilityGuid = Guid.Empty;
             var status = _stability.UpdateAllProductStability(productStability);
+            if (status)
+            {
+                return RedirectToAction("index", "product");
+            }
+            return Json(new { Status = "Error" });
+        }
+
+        public ActionResult SaveList(StabilityListViewModel productStability)
+        {
+            Guid stabilityGuid = Guid.Empty;
+            var status = _stability.UpdateAllProductStability(productStability.StabilityDetails);
             if (status)
             {
                 return RedirectToAction("index", "product");

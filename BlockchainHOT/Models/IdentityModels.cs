@@ -14,7 +14,7 @@ namespace BlockchainHOT.Models
         {
         }
 
-        public System.Data.Entity.DbSet<BlockChainSI.Models.DeviceViewModel> DeviceViewModels { get; set; }
+        public System.Data.Entity.DbSet<BlockChainSI.Models.TempLoggerViewModel> TempLoggerViewModels { get; set; }
 
         public System.Data.Entity.DbSet<BlockChainSI.Models.BatchViewModel> BatchViewModels { get; set; }
 

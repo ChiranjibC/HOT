@@ -77,12 +77,24 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nethereum.Hex, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nethereum.Hex.1.0.3\lib\portable45-net45+win8+wpa81\Nethereum.Hex.dll</HintPath>
+    <Reference Include="Nethereum.ABI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.ABI.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.ABI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nethereum.JsonRpc.Client, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nethereum.JsonRpc.Client.1.0.3\lib\portable45-net45+win8+wpa81\Nethereum.JsonRpc.Client.dll</HintPath>
+    <Reference Include="Nethereum.Hex, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Hex.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.Hex.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.Client, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.Client.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.JsonRpc.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.RPC, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.RPC.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.RPC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.Web3, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Web3.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.Web3.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -90,8 +102,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -200,23 +219,36 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SiteConstants.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\LoggerController.cs" />
-    <Compile Include="Controllers\MapperController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
-    <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\StabilityController.cs" />
+    <Compile Include="Controllers\oldfiles\AccountController.cs" />
+    <Compile Include="Controllers\oldfiles\BaseController.cs" />
+    <Compile Include="Controllers\oldfiles\BatchController.cs" />
+    <Compile Include="Controllers\oldfiles\DeviceController.cs" />
+    <Compile Include="Controllers\oldfiles\HomeController.cs" />
+    <Compile Include="Controllers\oldfiles\LoggerController.cs" />
+    <Compile Include="Controllers\oldfiles\MapperController.cs" />
+    <Compile Include="Controllers\oldfiles\ProductController.cs" />
+    <Compile Include="Controllers\oldfiles\StabilityController.cs" />
+    <Compile Include="Controllers\AllowedTempRangeController.cs" />
+    <Compile Include="Controllers\TempTelemetryController.cs" />
+    <Compile Include="Controllers\OwnershipController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dao\Batch.cs" />
+    <Compile Include="Models\Dao\CreateBatchInput.cs" />
+    <Compile Include="Models\Dao\Proposal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OwnerService.cs" />
+    <Compile Include="Services\BatchService.cs" />
     <Compile Include="Services\DaoService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -272,6 +304,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\grid.locale-en.js" />
     <Content Include="Scripts\i18n\grid.locale-ar.js" />
@@ -333,12 +366,12 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\SiteJS\BatchStability.js" />
+    <Content Include="Scripts\SiteJS\Batch.js" />
+    <Content Include="Scripts\_OldJSFiles\_OldBatchStability.js" />
     <Content Include="Scripts\SiteJS\partial\CommonPartial.js" />
-    <Content Include="Scripts\SiteJS\DeviceStability.js" />
+    <Content Include="Scripts\_OldJSFiles\_OldDeviceStability.js" />
     <Content Include="Scripts\SiteJS\Common.js" />
-    <Content Include="Scripts\SiteJS\ProductAddEdit.js" />
-    <Content Include="Scripts\SiteJS\Stability.js" />
+    <Content Include="Scripts\_OldJSFiles\_OldStability.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="test.html" />
     <Content Include="Web.config" />
@@ -365,20 +398,23 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Device\Index.cshtml" />
+    <Content Include="Views\_old\TempLogger\Index.cshtml" />
     <Content Include="Views\Batch\Index.cshtml" />
-    <Content Include="Views\Stability\Index.cshtml" />
-    <Content Include="Views\Shared\_StabilityDetails.cshtml" />
-    <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Mapper\Index.cshtml" />
-    <Content Include="Views\Logger\Index.cshtml" />
-    <Content Include="Views\Stability\StabilityInfo.cshtml" />
-    <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Device\Edit.cshtml" />
+    <Content Include="Views\_old\Stability\Index.cshtml" />
+    <Content Include="Views\_old\Product\Index.cshtml" />
+    <Content Include="Views\_old\Mapper\Index.cshtml" />
+    <Content Include="Views\_old\Logger\Index.cshtml" />
+    <Content Include="Views\_old\Product\Edit.cshtml" />
+    <Content Include="Views\_old\TempLogger\Edit.cshtml" />
     <Content Include="Views\Batch\Edit.cshtml" />
-    <Content Include="Views\Mapper\Edit.cshtml" />
-    <Content Include="Views\Logger\Edit.cshtml" />
-    <Content Include="Views\Stability\StabilityList.cshtml" />
+    <Content Include="Views\_old\Mapper\Edit.cshtml" />
+    <Content Include="Views\_old\Logger\Edit.cshtml" />
+    <Content Include="Views\_old\Stability\StabilityList.cshtml" />
+    <Content Include="Views\AllowedTempRange\Index.cshtml" />
+    <Content Include="Views\OwnerShip\Edit.cshtml" />
+    <Content Include="Views\OwnerShip\Index.cshtml" />
+    <Content Include="Views\TempTelemetry\Index.cshtml" />
+    <Content Include="Views\TempTelemetry\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -394,6 +430,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlockChainHot.Repository\BlockChainHot.Repository.csproj">
+      <Project>{be52ebf2-dc07-4aa2-a5c0-50e6a03a6e19}</Project>
+      <Name>BlockChainHot.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlockChainSI\BlockChainSI.csproj">
       <Project>{d0240275-5c35-488b-b3b7-807b38d251c1}</Project>
       <Name>BlockChainSI</Name>

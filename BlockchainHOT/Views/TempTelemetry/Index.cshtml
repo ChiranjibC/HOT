@@ -1,0 +1,40 @@
+﻿@model BlockChainSI.Models.TemparatureTelemetryListViewModel
+
+@{
+    ViewBag.Title = "Temp Telemetry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Temperature Telemetry Details</h2>
+
+<p>
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "TempTelemetry")">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TempTelemetryList.FirstOrDefault().BatchDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TempTelemetryList.FirstOrDefault().Temperature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TempTelemetryList.FirstOrDefault().LogTime)
+        </th>
+    </tr>
+
+@foreach (var item in Model.TempTelemetryList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temperature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LogTime)
+        </td>
+    </tr>
+}
+
+</table>

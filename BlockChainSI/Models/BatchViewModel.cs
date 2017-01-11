@@ -9,33 +9,58 @@ namespace BlockChainSI.Models
 {
     public class BatchViewModel
     {
+        public BatchViewModel()
+        {
+            OwnerList = new SelectList("--Select--");
+            OwnershipDetails = new List<BatchOwnershipHistoryViewModel>();
+        }
+
         [Key]
-        public Guid BatchId { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Batch #")]
-        public string BatchNumber { get; set; }
+        public string BatchCode { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Batch Description")]
-        public string BatchDesc { get; set; }
+        [StringLength(16)] //as this is sent to BlockChain Bytes32
+        [Display(Name = "Batch")]
+        public string Description { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Product")]
-        public Guid ProductId { get; set; }
+        [Display(Name = "Temp Logger")]
+        public string TempLoggerCode { get; set; }
         
-        [DataType(DataType.Text)]
-        [Display(Name = "Product")]
-        public string Product { get; set; }
-
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Quantity")]
-        public string Quantity { get; set; }
+        [Display(Name = "Temp Logger")]
+        public OwnerViewModel TempLogger { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Current Owner")]
+        public string CurrentOwnerCode { get; set; }
 
-        public SelectList Products { get; set; }
+        [DataType(DataType.Text)]
+        [Display(Name = "Current Owner")]
+        public OwnerViewModel CurrentOwner { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Producer")]
+        public string ProducerCode { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Producer")]
+        public OwnerViewModel Producer { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Is Expired")]
+        public string IsExpired { get; set; }
+        
+        public SelectList OwnerList { get; set; }
+        public SelectList TempLoggerList { get; set; }
+        public List<BatchOwnershipHistoryViewModel> OwnershipDetails { get; set; }
+
     }
 }

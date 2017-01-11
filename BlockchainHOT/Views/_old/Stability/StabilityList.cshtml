@@ -1,0 +1,118 @@
+﻿@model BlockChainSI.Models.StabilityListViewModel
+
+<div>
+    <form action="@Url.Action("SaveList","Stability")" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Product Stability Info</h4>
+        </div>
+        <div>
+            <table class="table tblStabilityInfo">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StabilityDetails.FirstOrDefault().TempRange)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StabilityDetails.FirstOrDefault().AllowedTimeInMinutes)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @for (int i = 0; i < Model.StabilityDetails.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(modelItem => Model.StabilityDetails[i].TempRange.TempRangeId, new SelectList(ViewBag.TempRangeListVB, "TempRangeId", "TempRange", Model.StabilityDetails[i].TempRange.TempRangeId), new { @class = "form-control" })
+                            @Html.HiddenFor(modelItem => modelItem.StabilityDetails[i].TempRange.TempRangeId)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => modelItem.StabilityDetails[i].AllowedTimeInMinutes, new { @class = "form-control" })
+                            @Html.HiddenFor(modelItem => modelItem.StabilityDetails[i].StabilityId)
+                            @Html.HiddenFor(modelItem => modelItem.StabilityDetails[i].ProductId)
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model.StabilityDetails[i].StabilityId"> - </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.StabilityDetails[i].StabilityId"> + </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <table class="hidden">
+            <tr id="templateRowEdit">
+                <td>
+                    @*@Html.DropDownList("StabilityDetails[index].TempRange.TempRangeId", Model.TempRangeList, "-- Select --", new { @class = "form-control" })*@
+                    @Html.DropDownList("StabilityDetails[index].TempRange.TempRangeId", new SelectList(ViewBag.TempRangeListVB, "TempRangeId", "TempRange"), "-- Select --", new { @class = "form-control" })
+                </td>
+                <td>
+                    <input class="form-control" data-val="true"
+                           data-val-number="The field Allowed Time in Minutes must be a number."
+                           data-val-required="The Allowed Time in Minutes field is required."
+                           name="StabilityDetails[index].AllowedTimeInMinutes" type="text" value="">
+                    <input data-val="true" data-val-required="The StabilityId field is required."
+                           name="StabilityDetails[index].StabilityId" type="hidden" value="@Guid.Empty">
+                    <input data-val="true" data-val-required="The StabilityId field is required."
+                           name="StabilityDetails[index].ProductId" type="hidden" value="@Model.StabilityDetails[0].ProductId">
+                </td>
+                <td>
+
+                    <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model.StabilityDetails.FirstOrDefault().ProductId"> - </a>
+                </td>
+                <td>
+
+                    <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.StabilityDetails.FirstOrDefault().ProductId"> + </a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <button type="submit" class="btn-default">Submit</button>
+        </div>
+    </form>
+</div>
+
+@Scripts.Render("~/bundles/partialjs")
+
+<script>
+    $(".addStabilityLink").click(function () {        
+        addNewRow(this);
+    });
+
+    $(".deleteStabilityLink").click(function () {
+        deleteRow(this);
+    });
+
+    function deleteRow(_this) {
+        var $buttonClicked = $(_this);
+        $($buttonClicked).closest("tr").remove();
+    }
+
+    function addNewRow(_this) {
+        console.log("add new row clicked");
+        var $buttonClicked = $(_this);
+        //debugger;
+        var lastRowIndex = $("table.tblStabilityInfo tr:last").index();
+        var newRow = $("#templateRowEdit").clone().removeAttr("id");
+        $(newRow).find("input, select").each(function () {
+            console.log("each tr input");
+            inputName = $(this).attr("name").replace("index", lastRowIndex);
+            $(this).attr("name", inputName);
+        });
+        //newRow = $(newRow).html().replace(/[index]/, '[' + lastRowIndex + ']');
+        $(newRow).appendTo($("#templateRowNew").parent());
+        $(newRow).insertAfter($($buttonClicked).parent().parent());
+
+        //bind click method
+        $(".addStabilityLink").click(function () {
+            addNewRow(this);
+        });
+
+        $(".deleteStabilityLink").click(function () {
+            deleteRow(this);
+        });
+    }
+</script>

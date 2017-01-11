@@ -1,0 +1,132 @@
+﻿@model BlockChainSI.Models.StabilityRangeListViewModel
+
+<div>
+    <form action="@Url.Action("Index","AllowedTempRange")" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Batch Stability Info</h4>
+        </div>
+        <div>
+            <table class="table tblStabilityInfo">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AllowedTemperatureRanges.FirstOrDefault().RangeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AllowedTemperatureRanges.FirstOrDefault().MinTemp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AllowedTemperatureRanges.FirstOrDefault().MaxTemp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AllowedTemperatureRanges.FirstOrDefault().ExpireTickCount)
+                    </th>
+                    <th></th>
+                </tr>
+                @if (Model.AllowedTemperatureRanges.Count() > 0)
+                {
+                for (int i = 0; i < Model.AllowedTemperatureRanges.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(modelItem => Model.AllowedTemperatureRanges[i].Id)
+                            @Html.HiddenFor(modelItem => Model.AllowedTemperatureRanges[i].BatchCode)
+                            @Html.TextBoxFor(modelItem => Model.AllowedTemperatureRanges[i].RangeId)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model.AllowedTemperatureRanges[i].MinTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model.AllowedTemperatureRanges[i].MaxTemp)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model.AllowedTemperatureRanges[i].ExpireTickCount)
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model.AllowedTemperatureRanges[i].Id"> - </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.AllowedTemperatureRanges[i].Id"> + </a>
+                        </td>
+                    </tr>
+                }
+                }
+            </table>
+        </div>
+        @Html.HiddenFor(m => m.BatchId);
+        <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <button type="submit" class="btn-default">Submit</button>
+        </div>
+    </form>
+    <table class="hidden">
+        <tr id="templateRowEdit">
+            <td>
+                <input name="AllowedTemperatureRanges[index].Id" type="hidden" value="0">
+                <input name="AllowedTemperatureRanges[index].BatchCode" type="hidden" value="@Model.AllowedTemperatureRanges[0].BatchCode">
+                <input data-val="true" data-val-required="The RangeId field is required."
+                       name="AllowedTemperatureRanges[index].RangeId" type="text" value="">
+            </td>
+            <td>
+                <input data-val="true" data-val-required="The MinTemp field is required."
+                       name="AllowedTemperatureRanges[index].MinTemp" type="text" value="">
+            </td>
+            <td>
+                <input data-val="true" data-val-required="The MaxTemp field is required."
+                       name="AllowedTemperatureRanges[index].MaxTemp" type="text" value="">
+            </td>
+            <td>
+                <input data-val="true" data-val-required="The ExpireTickCount field is required."
+                       name="AllowedTemperatureRanges[index].ExpireTickCount" type="text" value="">
+            </td>
+            <td>
+                <a href="javascript:void(0);" class="deleteStabilityLink" data-id="@Model.AllowedTemperatureRanges.FirstOrDefault().Id"> - </a>
+            </td>
+            <td>
+                <a href="javascript:void(0);" class="addStabilityLink" data-id="@Model.AllowedTemperatureRanges.FirstOrDefault().Id"> + </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@Scripts.Render("~/bundles/partialjs")
+
+<script>
+    $(".addStabilityLink").click(function () {
+        addNewRow(this);
+    });
+
+    $(".deleteStabilityLink").click(function () {
+        deleteRow(this);
+    });
+
+    function deleteRow(_this) {
+        var $buttonClicked = $(_this);
+        $($buttonClicked).closest("tr").remove();
+    }
+
+    function addNewRow(_this) {
+        console.log("add new row clicked");
+        var $buttonClicked = $(_this);
+        //debugger;
+        var lastRowIndex = $("table.tblStabilityInfo tr:last").index();
+        var newRow = $("#templateRowEdit").clone().removeAttr("id");
+        $(newRow).find("input, select").each(function () {
+            console.log("each tr input");
+            inputName = $(this).attr("name").replace("index", lastRowIndex);
+            $(this).attr("name", inputName);
+        });
+        //newRow = $(newRow).html().replace(/[index]/, '[' + lastRowIndex + ']');
+        $(newRow).appendTo($("#templateRowNew").parent());
+        $(newRow).insertAfter($($buttonClicked).parent().parent());
+
+        //bind click method
+        $(".addStabilityLink").click(function () {
+            addNewRow(this);
+        });
+
+        $(".deleteStabilityLink").click(function () {
+            deleteRow(this);
+        });
+    }
+</script>

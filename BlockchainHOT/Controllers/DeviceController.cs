@@ -9,11 +9,11 @@ using System.Web.Mvc;
 
 namespace BlockchainHOT.Controllers
 {
-    public class DeviceController : Controller
+    public class TempLoggerController : Controller
     {
-        private IDevice _device;
+        private ITempLogger _device;
 
-        public DeviceController(IDevice device)
+        public TempLoggerController(ITempLogger device)
         {
             _device = device;
         }
@@ -67,19 +67,19 @@ namespace BlockchainHOT.Controllers
         {
             Guid guid = Guid.Empty;
             Guid.TryParse(id, out guid);
-            var device = guid != Guid.Empty ? _device.GetDetails(guid) : new DeviceViewModel();
+            var device = guid != Guid.Empty ? _device.GetDetails(guid) : new TempLoggerViewModel();
             return PartialView(device);
         }
 
         //
         // POST: /Device/Edit/5
         [HttpPost]
-        public ActionResult Edit(DeviceViewModel device)
+        public ActionResult Edit(TempLoggerViewModel device)
         {
             try
             {
                 var updatedDevice = _device.UpdateDevice(device);
-                if (updatedDevice.DeviceId != Guid.Empty)
+                if (updatedDevice.TempLoggerId != Guid.Empty)
                 {
                     return RedirectToAction("Index");
                 }

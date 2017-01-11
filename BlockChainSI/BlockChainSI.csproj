@@ -31,13 +31,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.1\lib\net45\crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EdjCase.JsonRpc.Client, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdjCase.JsonRpc.Client.1.0.5\lib\portable45-net45+win8+wpa81\EdjCase.JsonRpc.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EdjCase.JsonRpc.Core, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EdjCase.JsonRpc.Core.1.0.4\lib\portable45-net45+win8+wpa81\EdjCase.JsonRpc.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.ABI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.ABI.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.ABI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.Hex, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Hex.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.Hex.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.Client, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.JsonRpc.Client.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.JsonRpc.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.RPC, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.RPC.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.RPC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nethereum.Web3, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nethereum.Web3.1.0.4\lib\portable45-net45+win8+wpa81\Nethereum.Web3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -70,34 +120,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\ILogger.cs" />
-    <Compile Include="Contracts\IMapper.cs" />
-    <Compile Include="Contracts\IDevice.cs" />
-    <Compile Include="Contracts\IStability.cs" />
-    <Compile Include="Contracts\IProduct.cs" />
-    <Compile Include="Contracts\ITempRange.cs" />
-    <Compile Include="Mock\MockLogger.cs" />
-    <Compile Include="Mock\MockMapper.cs" />
-    <Compile Include="Mock\MockDevice.cs" />
-    <Compile Include="Mock\MockProduct.cs" />
-    <Compile Include="Mock\MockBatch.cs" />
+    <Compile Include="Common\AutoMapperConfig.cs" />
+    <Compile Include="Contracts\IAllowedBatchTempRanges.cs" />
+    <Compile Include="Contracts\IOwnerShip.cs" />
+    <Compile Include="Contracts\ITempTelemetry.cs" />
+    <Compile Include="Contracts\Old\ILogger.cs" />
+    <Compile Include="Contracts\Old\IMapper.cs" />
+    <Compile Include="Contracts\Old\IProduct.cs" />
+    <Compile Include="Contracts\Old\IStability.cs" />
+    <Compile Include="Contracts\Old\ITempLogger.cs" />
+    <Compile Include="Contracts\Old\ITempRange.cs" />
+    <Compile Include="Dao\Batch.cs" />
+    <Compile Include="Dao\ErrorEvent.cs" />
+    <Compile Include="Dao\TempTelemetryInput.cs" />
+    <Compile Include="Dao\BatchInput.cs" />
+    <Compile Include="Mock\MockAllowedTempRanges.cs" />
+    <Compile Include="Mock\MockBatchDB.cs" />
+    <Compile Include="Mock\MockOwnership.cs" />
+    <Compile Include="Mock\MockTempTelemetry.cs" />
+    <Compile Include="Mock\Old\MockLogger.cs" />
+    <Compile Include="Mock\Old\MockMapper.cs" />
+    <Compile Include="Mock\Old\MockTempLogger.cs" />
+    <Compile Include="Mock\Old\MockProduct.cs" />
+    <Compile Include="Mock\Old\MockBatch.cs" />
     <Compile Include="Contracts\IBatch.cs" />
-    <Compile Include="Mock\MockData.cs" />
-    <Compile Include="Mock\MockStability.cs" />
-    <Compile Include="Mock\MockTempRange.cs" />
-    <Compile Include="Models\LoggerViewModel.cs" />
-    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Mock\Old\MockData.cs" />
+    <Compile Include="Mock\Old\MockStability.cs" />
+    <Compile Include="Mock\Old\MockTempRange.cs" />
+    <Compile Include="Models\StabilityRangeListViewModel.cs" />
+    <Compile Include="Models\Old\BatchViewModel.cs" />
+    <Compile Include="Models\Old\DeviceFamilyViewModel.cs" />
+    <Compile Include="Models\Old\LoggerViewModel.cs" />
+    <Compile Include="Models\Old\MapperViewModel.cs" />
+    <Compile Include="Models\Old\OwnerViewModel.cs" />
+    <Compile Include="Models\Old\ProductViewModel.cs" />
+    <Compile Include="Models\Old\StabilityChartViewModel.cs" />
+    <Compile Include="Models\Old\StabilityListViewModel.cs" />
+    <Compile Include="Models\Old\TempLoggerViewModel.cs" />
+    <Compile Include="Models\Old\TempRangeViewModel.cs" />
+    <Compile Include="Models\BatchOwnershipHistoryViewModel.cs" />
+    <Compile Include="Models\OwnerViewModel.cs" />
     <Compile Include="Models\BatchViewModel.cs" />
-    <Compile Include="Models\DeviceFamilyViewModel.cs" />
-    <Compile Include="Models\DeviceViewModel.cs" />
-    <Compile Include="Models\MapperViewModel.cs" />
-    <Compile Include="Models\StabilityListViewModel.cs" />
-    <Compile Include="Models\StabilityChartViewModel.cs" />
-    <Compile Include="Models\TempRangeViewModel.cs" />
+    <Compile Include="Models\Old\BatchTempRangeViewModel.cs" />
+    <Compile Include="Models\TemparatureTelemetryListViewModel.cs" />
+    <Compile Include="Models\TemparatureTelemetryViewModel.cs" />
+    <Compile Include="Models\StabilityRangeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\BatchService.cs" />
+    <Compile Include="Services\TemperatureTelemetryService.cs" />
+    <Compile Include="Services\OwnerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockChainHot.Repository\BlockChainHot.Repository.csproj">
+      <Project>{be52ebf2-dc07-4aa2-a5c0-50e6a03a6e19}</Project>
+      <Name>BlockChainHot.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,23 +8,35 @@
 
 <p>
     <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Batch")">Create New</a>
+    <div class="pull-right">
+        <button type="button" class="btn-primary btnRefresh" data-url="@Url.Action("RefreshData", "Batch")" title="Click to refresh data from Block Chain">
+            Refresh Data
+        </button>
+    </div>
 </p>
-
+<br />
 
 <table class="table">
     <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.BatchCode)
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.BatchNumber)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BatchDesc)
+            @Html.DisplayNameFor(model => model.TempLogger)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product)
+            @Html.DisplayNameFor(model => model.CurrentOwner)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayNameFor(model => model.Producer)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExpired)
+        </th>
+        <th>Edit</th>
         <th></th>
     </tr>
     @if (Model != null)
@@ -32,21 +44,31 @@
         foreach (var item in Model)
         {
             <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.BatchCode)
+                </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.BatchNumber)
+                    @Html.HiddenFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BatchDesc)
+                    @Html.DisplayFor(modelItem => item.TempLogger.OwnerDesc)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product)
+                    @Html.DisplayFor(modelItem => item.CurrentOwner.OwnerDesc)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
+                    @Html.DisplayFor(modelItem => item.Producer.OwnerDesc)
                 </td>
                 <td>
-                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "batch")" data-id="@item.BatchId">Edit</a>  |
-                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "batch")" data-id="@item.BatchId">Delete</a>
+                    @Html.DisplayFor(modelItem => item.IsExpired)
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "batch")" data-id="@item.BatchCode">Edit</a>
+                    @*<a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "batch")" data-id="@item.BatchCode">Delete</a>*@
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="editLink badge" data-url="@Url.Action("index", "AllowedTempRange")" data-id="@item.BatchCode">Stability Range</a>
                 </td>
             </tr>           
         }

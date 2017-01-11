@@ -31,12 +31,9 @@ namespace BlockchainHOT.Controllers
         public ActionResult Edit(string Id)
         {
             Guid productGuid = Guid.Empty;
-            if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out productGuid))
-            {
-                productGuid = Guid.NewGuid();
-            }
-            //var product = _product.GetProductDetails(productGuid); //TODO: Get the details for this Id for editing
-            return PartialView(new ProductViewModel() { ProductId = productGuid });
+            Guid.TryParse(Id, out productGuid);
+            var product = productGuid != Guid.Empty ? _product.GetDetails(productGuid) : new ProductViewModel();
+            return PartialView(product);
         }
 
         /// <summary>
@@ -47,7 +44,7 @@ namespace BlockchainHOT.Controllers
         [HttpPost]
         public ActionResult Edit(ProductViewModel product)
         {
-            //var product = _product.SaveProductDetails(product); //TODO:
+            var updatedProduct = _product.UpdateProduct(product);
             return Json(new { Status = "success" });
         }
     }

@@ -12,10 +12,15 @@ namespace BlockchainHOT.Controllers
     public class MapperController : BaseController
     {
         private IMapper _mapper;
-        public MapperController(IMapper mapper)
+        private IBatch _batch;
+        private ITempLogger _device;
+        public MapperController(IMapper mapper, IBatch batch, ITempLogger device)
         {
             _mapper = mapper;
+            _batch = batch;
+            _device = device;
         }
+
         //
         // GET: /Batch/
         public ActionResult Index()
@@ -66,8 +71,22 @@ namespace BlockchainHOT.Controllers
         {
             Guid guid = Guid.Empty;
             Guid.TryParse(id, out guid);
-            var device = guid != Guid.Empty ? _mapper.GetDetails(guid) : new MapperViewModel();
-            return PartialView(device);
+            var mapper = guid != Guid.Empty ? _mapper.GetDetails(guid) : new MapperViewModel();
+
+            var selectBatchList = _batch.GetBatchItems(20, 1)
+                                        .Select(s => new {
+                                            BatchId = s.BatchId,
+                                            BatchInfo = string.Format("{0}: {1}", s.BatchNumber, s.BatchDesc)
+                                        }).ToList();
+            var selectDeviceList = _device.GetDeviceList(20, 1)
+                                        .Select(s => new {
+                                            DeviceId = s.TempLoggerId,
+                                            DeviceInfo = string.Format("{0}: {1}", s.TempLoggerNo, s.TempLoggerShortName)
+                                        }).ToList();
+
+            mapper.BatchList = new SelectList(selectBatchList, "BatchId", "BatchInfo");
+            mapper.DeviceList = new SelectList(selectDeviceList, "DeviceId", "DeviceInfo");            
+            return PartialView(mapper);
         }
 
         //

@@ -1,0 +1,76 @@
+﻿@model BlockChainSI.Models.LoggerViewModel
+
+
+@using (Html.BeginForm("Edit", "Logger", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Edit - Update Temperature</h4>
+        </div>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.LoggerId)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TempLogger, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.TempLogger.TempLoggerId, Model.DeviceList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TempLogger, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Batch, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DisplayTextFor(model => model.Batch.BatchNumber) - 
+                @Html.DisplayTextFor(model => model.Batch.BatchDesc)
+                @ * @Html.DropDownListFor(model => model.Batch.BatchId, Model.BatchList, "-- Select --", new { @class = "form-control" })* @
+                @Html.ValidationMessageFor(model => model.Batch, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RecordDateTime, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.RecordDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RecordDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stage, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Stage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Stage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TempRange, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">                
+                @Html.DropDownListFor(model => model.TempRange.TempRangeId, Model.TempRangeList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TempRange, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DurationInMins, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.DurationInMins, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DurationInMins, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <input type="submit" value="Save" class="btn btn-default saveBtn" />
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/partialjs")

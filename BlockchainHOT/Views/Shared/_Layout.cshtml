@@ -22,12 +22,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>                    
-                    <li>@Html.ActionLink("Device", "Index", "Device")</li>
-                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
                     <li>@Html.ActionLink("Batch", "Index", "Batch")</li>                    
-                    <li>@Html.ActionLink("Mapper", "Index", "Mapper")</li>
-                    <li>@Html.ActionLink("Logger", "Index", "Logger")</li>                    
-                    @*<li>@Html.ActionLink("Batch Info", "BatchInfo", "Batch")</li>*@   
+                    <li>@Html.ActionLink("Ownership", "Index", "Ownership")</li>                    
+                    <li>@Html.ActionLink("Telemetry", "Index", "TempTelemetry")</li>   
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -50,11 +47,7 @@
         </div>
     </div> 
     <script language="JavaScript" type="text/javascript">
-        var StabilityDetailURL = '@Url.Action("StabilityList", "Stability")'
-        //var StabilityDetailURL = '@Url.Action("StabilityInfo", "Stability")'
         var StabilityDeleteURL = '@Url.Action("Delete", "Stability")'
-        var StabilitySaveURL = '@Url.Action("Add", "Stability")'
-        var ProductSaveURL = '@Url.Action("Edit", "Product")'
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

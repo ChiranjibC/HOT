@@ -11,9 +11,15 @@ namespace BlockchainHOT.Controllers
     public class LoggerController : Controller
     {
         private ILogger _logger;
-        public LoggerController(ILogger logger)
+        private IBatch _batch;
+        private ITempLogger _device;
+        private ITempRange _tempRange;
+        public LoggerController(ILogger logger, IBatch batch, ITempLogger device, ITempRange tempRange)
         {
             _logger = logger;
+            _batch = batch;
+            _device = device;
+            _tempRange = tempRange;
         }
         //
         // GET: /Batch/
@@ -65,8 +71,29 @@ namespace BlockchainHOT.Controllers
         {
             Guid guid = Guid.Empty;
             Guid.TryParse(id, out guid);
-            var device = guid != Guid.Empty ? _logger.GetDetails(guid) : new LoggerViewModel();
-            return PartialView(device);
+            var logItem = guid != Guid.Empty ? _logger.GetDetails(guid) : new LoggerViewModel();
+
+            var selectBatchList = _batch.GetBatchItems(20, 1)
+                                        .Select(s => new {
+                                            BatchId = s.BatchId,
+                                            BatchInfo = string.Format("{0}: {1}", s.BatchNumber, s.BatchDesc)
+                                        }).ToList();
+            var selectDeviceList = _device.GetDeviceList(20, 1)
+                                        .Select(s => new {
+                                            DeviceId = s.TempLoggerId,
+                                            DeviceInfo = string.Format("{0}: {1}", s.TempLoggerNo, s.TempLoggerShortName)
+                                        }).ToList();
+            var selectTempRangeList = _tempRange.GetTempRanges()
+                                        .Select(s => new {
+                                            TempRangeId = s.TempRangeId,
+                                            TempRangeInfo = string.Format("{0}: {1}", s.TempRangeCode, s.TempRange)
+                                        }).ToList();
+
+            logItem.BatchList = new SelectList(selectBatchList, "BatchId", "BatchInfo");
+            logItem.DeviceList = new SelectList(selectDeviceList, "DeviceId", "DeviceInfo");
+            logItem.TempRangeList = new SelectList(selectTempRangeList, "TempRangeId", "TempRangeInfo");
+
+            return PartialView(logItem);
         }
 
         [HttpPost]

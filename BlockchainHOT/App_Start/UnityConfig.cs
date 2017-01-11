@@ -22,11 +22,14 @@ namespace BlockchainHOT
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             container.RegisterType<IProduct, MockProduct>();
             container.RegisterType<IStability, MockStability>();
-            container.RegisterType<IDevice, MockDevice>();
-            container.RegisterType<IBatch, MockBatch>();
+            container.RegisterType<ITempLogger, MockTempLogger>();
+            container.RegisterType<IBatch, MockBatchDB>(); //using the database mock
             container.RegisterType<IMapper, MockMapper>();
             container.RegisterType<ILogger, MockLogger>();
             container.RegisterType<ITempRange, MockTempRange>();
+            container.RegisterType<IAllowedBatchTempRanges, MockAllowedTempRanges>();
+            container.RegisterType<IOwnership, MockOwnership>();
+            container.RegisterType<ITempTelemetry, MockTempTelemetry>();
         }
     }
 }

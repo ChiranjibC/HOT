@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BlockChainSI.Models.TempLoggerViewModel>
+
+@{
+    ViewBag.Title = "Temp Logger";
+}
+
+<h2>Temp Logger Details</h2>
+
+<p>
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "TempLogger")">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TempLoggerNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TempLoggerShortName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LogInterval)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null) { 
+        foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempLoggerNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempLoggerShortName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.LogInterval)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "TempLogger")" data-id="@item.TempLoggerId">Edit</a>  |                    
+                    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "TempLogger")" data-id="@item.TempLoggerId">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+</table>

@@ -1,0 +1,57 @@
+﻿@model BlockChainSI.Models.BatchViewModel
+
+
+@using (Html.BeginForm("edit","Batch",FormMethod.Post, new { Id = "editForm"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
+            <h4 class="modal-title" id="myModalLabel">Batch</h4>
+        </div>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
+        @Html.HiddenFor(model => model.BatchCode)
+        <input id="Id" name="Id" type="hidden" value="@Model.Id">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TempLoggerCode, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.TempLoggerCode, Model.TempLoggerList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TempLoggerCode, "", new { @class = "text-danger" })
+            </div>
+        </div>        
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.CurrentOwnerCode, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.CurrentOwnerCode, Model.OwnerList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CurrentOwnerCode, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProducerCode, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.ProducerCode, Model.OwnerList, "-- Select --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProducerCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="panel-footer text-center">
+            <button type="button" id="btnClose">Close</button>
+            <input type="submit" value="Save" class="btn btn-default btn-success btnSave" />
+            <div class="validation-summary-errors hidden errors">
+            </div>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/partialjs")

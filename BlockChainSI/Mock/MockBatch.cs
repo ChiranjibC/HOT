@@ -17,7 +17,7 @@ namespace BlockChainSI.Mock
             {
                 if (_batchList == null)
                 {
-                    _batchList = GetBatchItems(15).ToList();
+                    _batchList = GetBatchItems(20).ToList();
                 }
                 return _batchList;
             }
@@ -56,9 +56,8 @@ namespace BlockChainSI.Mock
                 BatchDesc = "Batch details_" + GetRand(),
                 BatchId = Guid.NewGuid(),
                 BatchNumber = "BatchNumber_" + GetRand(),
-                ProductId = MockProduct.productList[GetRandInt(0, MockProduct.productList.Count -1)].ProductId,
+                Product = MockProduct.productList[GetRandInt(0, MockProduct.productList.Count -1)],
                 Quantity = GetRand(),
-
             };
             return batch;
         }

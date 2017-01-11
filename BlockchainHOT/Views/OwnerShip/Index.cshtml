@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BlockChainSI.Models.BatchOwnershipHistoryViewModel>
+
+@{
+    ViewBag.Title = "Ownership";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ownership Info</h2>
+
+<p>
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Ownership")">Assign Owner</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Batch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Batch.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.OwnerDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>*@
+        <td>
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Ownership")" data-id="@item.BatchCode">Change Owner</a>
+            @*<a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "Ownership")" data-id="@item.BatchCode">Delete</a>*@
+        </td>
+    </tr>
+}
+
+</table>
