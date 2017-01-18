@@ -34,7 +34,7 @@ namespace BlockChainSI.Models
         
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Max Tick Counts")]
+        [Display(Name = "Max Tick Counts (~15 Mins)")]
         public decimal ExpireTickCount { get; set; }
 
         public SelectList Batches { get; set; }

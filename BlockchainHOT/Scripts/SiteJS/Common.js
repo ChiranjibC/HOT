@@ -1,10 +1,41 @@
-﻿$(document).ready(function () {
+﻿function enableWaitModal()
+{
+    var options = { "backdrop": "static", keyboard: true };
+    $('#loadingModal').modal(options);
+    $('#loadingModal').modal('show');
+}
+
+$(document).ready(function () {
     $("#closbtn").click(function () {
         $('#myModal').modal('hide');
     });
 });
 
 $(function () {
+    $.ajaxSetup({
+        // your ajax code
+        beforeSend: function () {
+            console.log("ajax before send");
+            enableWaitModal();
+
+            //$('.modal').on('hidden.bs.modal', function (e) {
+            //    if ($('.modal').hasClass('in')) {
+            //        $('body').addClass('modal-open');
+            //    }
+            //});
+
+            //var $mainModal = $('#myModal');
+            //var $loadingModal = $("#loadingDiv");     //get reference to nested modal
+            //$loadingModal.after($mainModal);
+            //$mainModal.after($loadingModal);
+        },
+        complete: function () {
+            console.log("ajax after send")
+            $('#loadingModal').modal('hide');
+
+        }
+    });
+
     $(".editLink").click(function () {
         //debugger;
         var $buttonClicked = $(this);

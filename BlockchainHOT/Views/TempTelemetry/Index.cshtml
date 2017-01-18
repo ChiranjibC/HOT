@@ -7,9 +7,59 @@
 
 <h2>Temperature Telemetry Details</h2>
 
+@if(!string.IsNullOrEmpty(Model.ErrorMsg))
+{
+    <div class="validation-summary-errors">
+        @Model.ErrorMsg
+    </div>
+}
 <p>
-    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "TempTelemetry")">Create New</a>
+    <button type="button" class="btn-primary bulkUploadLink" title="Click to bulk upload the temperature telemetry data">
+        Bulk Upload
+    </button>    
+    <div class="pull-right">
+        <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "TempTelemetry")">Create New</a>     
+    </div>    
 </p>
+<div id="bulkUploadDiv" class="container table-bordered modal-content col-md-6"  style="display: none;">    
+    @using (Html.BeginForm("BulkUpload", "TempTelemetry", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit= "enableWaitModal();" }))
+    {
+        <div class="form-horizontal">
+            <div class="modal-header">
+                <div class="modal-title panel-heading">
+                    Bulk Upload
+                    <div class="clearfix pull-right">
+                        <a href="~/Common/BulkTempLoggerTemplate.csv" title="Bulk upload template">Sample File</a>
+                    </div>
+                </div>
+             </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectBatch.BatchCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.SelectBatch.BatchCode, Model.BatchList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SelectBatch.BatchCode, "", new { @class = "text-danger" })
+                </div>
+             </div>
+            <div class="form-group">                
+                <label for="fileDoc" class="control-label col-md-2">Upload</label>
+                <div class="col-md-8">
+                <input name="fileDoc" class="form-control form-control-file" accept=".csv,.xls,.xlsx,.txt" type="file" placeholder="Please select bulk temperature telemetry file..." /></div>
+             </div>
+            <div class="text-center">
+                <button type="button" id="btnCancelUpload" class="btn">Cancel</button>
+                <input type="submit" value="Submit" class="btn btn-default btn-success" />
+                <div id="loadingDiv" class="modal loader" style="display: none;">
+                    <center>
+                        <img class="loading-image" src="~/content/images/ajax-loader.gif" alt="loading..">
+                    </center>
+                </div>
+            </div>
+            <br/>
+            </div>
+        }
+</div>
+
 <table class="table">
     <tr>
         <th>

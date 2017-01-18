@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<BlockChainSI.Models.BatchOwnershipHistoryViewModel>
 
 @{
-    ViewBag.Title = "Ownership";
+    ViewBag.Title = "Track Batch";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Ownership Info</h2>
+<h2>Tracking Details</h2>
 
 <p>
-    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Ownership")">Assign Owner</a>
+    <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("Edit", "Ownership")">Initiate Batch Tracking</a>
 </p>
 <table class="table">
     <tr>
@@ -16,7 +16,8 @@
             @Html.DisplayNameFor(model => model.Batch)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Owner)
+            Tracker
+            @*@Html.DisplayNameFor(model => model.Owner)*@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
@@ -42,7 +43,7 @@
             @Html.DisplayFor(modelItem => item.EndTime)
         </td>*@
         <td>
-            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Ownership")" data-id="@item.BatchCode">Change Owner</a>
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Ownership")" data-id="@item.BatchCode">Change Tracker</a>
             @*<a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "Ownership")" data-id="@item.BatchCode">Delete</a>*@
         </td>
     </tr>

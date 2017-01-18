@@ -55,8 +55,13 @@
         </div>
         @Html.HiddenFor(m => m.BatchId);
         <div class="panel-footer text-center">
-            <button type="button" id="btnClose">Close</button>
-            <button type="submit" class="btn-default">Submit</button>
+            <button type="button" id="btnClose" class="btn">Close</button>
+            <button type="submit" class="btn btn-default btn-primary">Submit</button>
+            <div id="loadingDiv" class="modal loader" style="display: none;">
+                <center>
+                    <img class="loading-image" src="~/content/images/ajax-loader.gif" alt="loading..">
+                </center>
+            </div>
         </div>
     </form>
     <table class="hidden">

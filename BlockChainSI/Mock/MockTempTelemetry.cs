@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using BlockChainSI.Services;
 using BlockChainSI.Dao;
 using Nethereum.ABI.Encoders;
+using System.Data;
 
 namespace BlockChainSI.Mock
 {
@@ -61,6 +62,23 @@ namespace BlockChainSI.Mock
                              orderby batch.Description
                              select batch).ToList();
             return new SelectList(batchList, "BatchCode", "Description");
+        }
+
+        public string BulkUpdate(DataSet tempTelemetryBulkData, string batchCode)
+        {
+            var status = string.Empty;
+            for (int i = 0; i < tempTelemetryBulkData.Tables[0].Rows.Count; i++)
+            {
+                var dr = tempTelemetryBulkData.Tables[0].Rows[i];
+                var tempTelemetry = new TemparatureTelemetryViewModel()
+                {
+                    BatchCode = batchCode,
+                    Temperature = Convert.ToInt32(dr[1]),
+                    LogTime = Convert.ToDateTime(dr[2]), //ideally current server time is being used in system as logtime
+                };
+                status += Update(tempTelemetry);
+            }
+            return status;
         }
 
         public string Update(TemparatureTelemetryViewModel tempTelemetry)

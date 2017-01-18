@@ -11,7 +11,9 @@ namespace BlockChainSI.Models
     {
         public IList<TemparatureTelemetryViewModel> TempTelemetryList { get; set; }
 
+        public TemparatureTelemetryViewModel SelectBatch { get; set; }
         public SelectList BatchList { get; set; }
+        public string ErrorMsg { get; set; }
 
     }
 }

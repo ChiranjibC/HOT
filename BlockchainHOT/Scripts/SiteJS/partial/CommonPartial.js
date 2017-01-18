@@ -8,7 +8,11 @@
     $("#editForm").submit(function (e) {
         e.preventDefault();
         $(".btnSave").prop('disabled', true);
-        $(".btnSave").removeClass('btn-success');
+        $(".btnSave").removeClass('btn-primary');
+
+        console.log("ajax before send-partial");
+        $('#loadingDiv').show();
+
         //debugger;
         console.log("From common partial -> saveBtn");
         var editForm = $(this);
@@ -23,6 +27,7 @@
             data: $(editForm).serialize(),
             //datatype: "json",
             success: function (data) {
+                $('#loadingDiv').hide();
                 if (data.success) {
                     window.location.reload();
                 }

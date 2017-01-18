@@ -130,7 +130,11 @@
     <Compile Include="Contracts\Old\IStability.cs" />
     <Compile Include="Contracts\Old\ITempLogger.cs" />
     <Compile Include="Contracts\Old\ITempRange.cs" />
+    <Compile Include="Dao\TemperaturHistoryDao.cs" />
     <Compile Include="Dao\Batch.cs" />
+    <Compile Include="Dao\BatchTemperatureTrackingInitiatedEvent.cs" />
+    <Compile Include="Dao\OwnershipAcknowledgedEvent.cs" />
+    <Compile Include="Dao\TempReceivedEvent.cs" />
     <Compile Include="Dao\ErrorEvent.cs" />
     <Compile Include="Dao\TempTelemetryInput.cs" />
     <Compile Include="Dao\BatchInput.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Mock\Old\MockData.cs" />
     <Compile Include="Mock\Old\MockStability.cs" />
     <Compile Include="Mock\Old\MockTempRange.cs" />
+    <Compile Include="Mock\PredicateBuilder.cs" />
     <Compile Include="Models\StabilityRangeListViewModel.cs" />
     <Compile Include="Models\Old\BatchViewModel.cs" />
     <Compile Include="Models\Old\DeviceFamilyViewModel.cs" />

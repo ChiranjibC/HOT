@@ -218,6 +218,6 @@ namespace BlockChainSI.Mock
             newBatchItem._batchId = batchCode;
             newBatchItem._deviceId = batch.TempLoggerCode;
             return newBatchItem;
-        }
+        }        
     }
 }

@@ -9,7 +9,7 @@
     <div class="form-horizontal">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close ×</button>
-            <h4 class="modal-title" id="myModalLabel">Ownership assignment</h4>
+            <h4 class="modal-title" id="myModalLabel">Track Batch</h4>
         </div>
         <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,10 +20,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BatchCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BatchCode, Model.BatchList, Model.BatchCode, new { htmlAttributes = new { @class = "form-control" } }) 
+                @Html.DropDownListFor(model => model.BatchCode, Model.BatchList, Model.BatchCode, new { @class = "form-control" }) 
                 <div>
                     <small>
-                        <i>*Only Batches with Unassigned owners are listed, use Change Owner option for Batches with already assigned owners</i>
+                        <i>*Only untracked Batches are listed, use Change Tracker option for Batches already Tracked.</i>
                     </small>
                 </div>
                 @Html.ValidationMessageFor(model => model.BatchCode, "", new { @class = "text-danger" })
@@ -42,9 +42,10 @@
         }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OwnerCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Tracked By</label>
+            @*@Html.LabelFor(model => model.OwnerCode, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.OwnerCode, Model.OwnerList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.OwnerCode, Model.OwnerList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OwnerCode, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,8 +67,13 @@
         </div>*@
 
         <div class="panel-footer text-center">
-            <button type="button" id="btnClose">Close</button>
-            <input type="submit" value="Save" class="btn btn-default btn-success btnSave" />
+            <button type="button" id="btnClose" class="btn">Close</button>
+            <input type="submit" value="Save" class="btn btn-default btn-primary btnSave" />
+            <div id="loadingDiv" class="modal loader" style="display: none;">
+                <center>
+                    <img class="loading-image" src="~/content/images/ajax-loader.gif" alt="loading..">
+                </center>
+            </div>
             <div class="validation-summary-errors hidden errors">
             </div>
         </div>

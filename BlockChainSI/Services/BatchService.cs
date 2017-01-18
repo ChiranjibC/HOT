@@ -48,13 +48,17 @@ namespace BlockChainSI.Services
             //var accounts = await web3Srv.Eth.Accounts.SendRequestAsync();
             var contract = web3Srv.Eth.GetContract(BATCH_ABI, BATCH_CONTRACT_ADDRESS);
             var batchFunction = contract.GetFunction("initiateBatchTracking");
-            var _EvtBatchTemperatureTrackingInitiated = contract.GetEvent("BatchTemperatureTrackingInitiated");
 
             //Error Event tracking
             Event _EvtError = contract.GetEvent("Error");
             var filterAllTask = _EvtError.CreateFilterAsync();
             filterAllTask.Wait();
             var filterAll = filterAllTask.Result;
+
+            Event _EvtBatchTracking = contract.GetEvent("BatchTemperatureTrackingInitiated");
+            var filterBatchTrackingTask = _EvtBatchTracking.CreateFilterAsync();
+            filterBatchTrackingTask.Wait();
+            var filterBatchTracking = filterBatchTrackingTask.Result;
 
             var resultBatchTask = batchFunction.SendTransactionAsync(_newBatch.SenderAddress,
                                                                         new HexBigInteger(500000),
@@ -86,9 +90,25 @@ namespace BlockChainSI.Services
             {
                 string logErrorInfo = Encoding.UTF8.GetString(log[0].Event.Info);
                 return logErrorInfo;
+            }                        
+            //Batch Tracking Initiated Event
+            var eventBatchTrakingTask = _EvtBatchTracking.GetFilterChanges<BatchTemperatureTrackingInitiatedEvent>(filterBatchTracking);
+            eventBatchTrakingTask.Wait();
+            var eventBatchTraking = eventBatchTrakingTask.Result;
+            if (eventBatchTraking != null && eventBatchTraking.Count > 0)
+            {
+                string batchDesc = Encoding.UTF8.GetString(eventBatchTraking[0].Event.BatchId);
+                if (!string.IsNullOrEmpty(batchDesc))
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return "Initiate Batch tracking not processed";
+                }
             }
-            
-            return string.Empty;
+
+            return "Initiate Batch tracking not processed";
         }
 
         public string AcknowledgeReceive(BatchInput batchInput)
@@ -106,6 +126,11 @@ namespace BlockChainSI.Services
             var filterAllTask = _EvtError.CreateFilterAsync();
             filterAllTask.Wait();
             var filterAll = filterAllTask.Result;
+
+            Event _EvtOwnershipAcknowledged = contract.GetEvent("OwnershipAcknowledged");
+            var filterOwnershipAcknowledgedTask = _EvtOwnershipAcknowledged.CreateFilterAsync();
+            filterOwnershipAcknowledgedTask.Wait();
+            var filterOwnershipAcknowledged = filterOwnershipAcknowledgedTask.Result;
 
             var resultBatchTask = batchFunction.SendTransactionAsync(batchInput.SenderAddress,
                                                                         new HexBigInteger(500000),
@@ -137,7 +162,24 @@ namespace BlockChainSI.Services
                 return logErrorInfo;
             }
 
-            return string.Empty;
+            //Error Event tracking
+            var eventOwnershipAcknowledgedTask = _EvtOwnershipAcknowledged.GetFilterChanges<OwnershipAcknowledgedEvent>(filterOwnershipAcknowledged);
+            eventOwnershipAcknowledgedTask.Wait();
+            var eventOwnershipAcknowledged = eventOwnershipAcknowledgedTask.Result;
+            if (eventOwnershipAcknowledged != null && eventOwnershipAcknowledged.Count > 0)
+            {
+                string batchDesc = Encoding.UTF8.GetString(eventOwnershipAcknowledged[0].Event.BatchId);
+                if (!string.IsNullOrEmpty(batchDesc))
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return "Initiate Batch tracking not processed";
+                }
+            }
+
+            return "Initiate Batch tracking not processed";
         }
 
         public BatchDao GetBatchInfoSync(string batchCode)
