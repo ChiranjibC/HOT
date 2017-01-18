@@ -151,7 +151,6 @@
     <Compile Include="Mock\Old\MockData.cs" />
     <Compile Include="Mock\Old\MockStability.cs" />
     <Compile Include="Mock\Old\MockTempRange.cs" />
-    <Compile Include="Mock\PredicateBuilder.cs" />
     <Compile Include="Models\StabilityRangeListViewModel.cs" />
     <Compile Include="Models\Old\BatchViewModel.cs" />
     <Compile Include="Models\Old\DeviceFamilyViewModel.cs" />
