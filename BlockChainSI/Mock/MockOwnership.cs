@@ -204,9 +204,9 @@ namespace BlockChainSI.Mock
             newBatchItem._lstExpireTickCount = new short[stabilityRangeCount];
             for (int i = 0; i < stabilityRangeCount; i++)
             {
-                newBatchItem._lstMinTemp[0] = (short)stabilityRanges[i].MinTemp;
-                newBatchItem._lstMaxTemp[0] = (short)stabilityRanges[i].MaxTemp;
-                newBatchItem._lstExpireTickCount[0] = (short)stabilityRanges[i].ExpireTickCount;
+                newBatchItem._lstMinTemp[i] = (short)stabilityRanges[i].MinTemp;
+                newBatchItem._lstMaxTemp[i] = (short)stabilityRanges[i].MaxTemp;
+                newBatchItem._lstExpireTickCount[i] = (short)stabilityRanges[i].ExpireTickCount;
             }
             return newBatchItem;
         }
