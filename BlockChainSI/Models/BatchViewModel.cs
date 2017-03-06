@@ -30,7 +30,7 @@ namespace BlockChainSI.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Temp Logger")]
+        [Display(Name = "Link Temperature Logger")]
         public string TempLoggerCode { get; set; }
         
         [Required]
@@ -43,15 +43,15 @@ namespace BlockChainSI.Models
         public string CurrentOwnerCode { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Current Owner")]
+        [Display(Name = "Tracked By")]
         public OwnerViewModel CurrentOwner { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Producer")]
+        [Display(Name = "Linked By")]
         public string ProducerCode { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Producer")]
+        [Display(Name = "Linked By")]
         public OwnerViewModel Producer { get; set; }
 
         [DataType(DataType.Text)]

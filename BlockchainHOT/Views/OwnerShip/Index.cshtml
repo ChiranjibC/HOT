@@ -15,16 +15,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Batch)
         </th>
-        <th>
-            Tracker
-            @*@Html.DisplayNameFor(model => model.Owner)*@
+        <th>            
+            @Html.DisplayNameFor(model => model.Owner)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>*@
         <th></th>
     </tr>
 
@@ -39,12 +35,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.StartTime)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>*@
         <td>
-            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Ownership")" data-id="@item.BatchCode">Change Tracker</a>
-            @*<a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "Ownership")" data-id="@item.BatchCode">Delete</a>*@
+            <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "Ownership")" data-id="@item.BatchCode">Change Tracker</a>            
         </td>
     </tr>
 }

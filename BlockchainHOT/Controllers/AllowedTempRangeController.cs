@@ -10,8 +10,8 @@ namespace BlockchainHOT.Controllers
 {
     public class AllowedTempRangeController : BaseController
     {
-        public IAllowedBatchTempRanges _allowedTempService;
-        public AllowedTempRangeController(IAllowedBatchTempRanges allowedTempService)
+        public IAllowedBatchTempRangesService _allowedTempService;
+        public AllowedTempRangeController(IAllowedBatchTempRangesService allowedTempService)
         {
             _allowedTempService = allowedTempService;
         }        

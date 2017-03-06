@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlockChainSI.Contracts
 {
-    public interface ITempTelemetry
+    public interface ITempTelemetryService
     {
         TemparatureTelemetryListViewModel GetTelemetryHistory(int pageSize, int pageNo, string batchCode = "");
         TemparatureTelemetryViewModel Get();

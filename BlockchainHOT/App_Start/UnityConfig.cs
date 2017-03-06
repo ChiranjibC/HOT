@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using BlockChainSI.Contracts;
-using BlockChainSI.Mock;
+using BlockChainSI.Services;
 
 namespace BlockchainHOT
 {
@@ -19,17 +19,11 @@ namespace BlockchainHOT
             
             // e.g. container.RegisterType<ITestService, TestService>();
             
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-            container.RegisterType<IProduct, MockProduct>();
-            container.RegisterType<IStability, MockStability>();
-            container.RegisterType<ITempLogger, MockTempLogger>();
-            container.RegisterType<IBatch, MockBatchDB>(); //using the database mock
-            container.RegisterType<IMapper, MockMapper>();
-            container.RegisterType<ILogger, MockLogger>();
-            container.RegisterType<ITempRange, MockTempRange>();
-            container.RegisterType<IAllowedBatchTempRanges, MockAllowedTempRanges>();
-            container.RegisterType<IOwnership, MockOwnership>();
-            container.RegisterType<ITempTelemetry, MockTempTelemetry>();
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));            
+            container.RegisterType<IBatchService, BatchService>();            
+            container.RegisterType<IAllowedBatchTempRangesService, AllowedBatchTempRangesService>();
+            container.RegisterType<IOwnershipService, OwnershipService>();
+            container.RegisterType<ITempTelemetryService, TempTelemetryService>();
         }
     }
 }

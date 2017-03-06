@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlockChainSI.Contracts
 {
-    public interface IAllowedBatchTempRanges
+    public interface IAllowedBatchTempRangesService
     {
         StabilityRangeListViewModel GetBatchAllowedTempDetails(string batchId);
         bool UpdateAllowedBatchTemp(StabilityRangeListViewModel allowedTempList);

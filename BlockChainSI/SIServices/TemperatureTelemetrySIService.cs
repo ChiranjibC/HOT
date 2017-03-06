@@ -10,22 +10,33 @@ using System.Threading;
 using System.Text;
 using Nethereum.ABI.Encoders;
 
-namespace BlockChainSI.Services
+namespace BlockChainSI.SIServices
 {
-    public class TemperatureTelemetryService : BaseService
+    /// <summary>
+    /// Temperature Telemetry System Interface service to connect to Block Chain
+    /// </summary>
+    public class TemperatureTelemetrySIService : BaseSIService
     {
         private readonly Web3 web3;        
         
         
         private Contract contract;
-        public TemperatureTelemetryService()
+        public TemperatureTelemetrySIService()
         { }
-        public TemperatureTelemetryService(Web3 web3, string address)
+        public TemperatureTelemetrySIService(Web3 web3, string address)
         {
             this.web3 = web3;
             this.contract = web3.Eth.GetContract(OWNER_ABI, address);
         }
 
+        /// <summary>
+        /// This method is used to create a temperature log entry with current temperature of the Temp Logger device
+        /// associated with a Batch.
+        /// This would trigger Smart Contract to expire the Batch, if the number of Stability entries exceeed the allowable Batch 
+        /// entries for the given temperature range (setup when creating a new Batch).
+        /// </summary>
+        /// <param name="tempTelemetryInput"></param>
+        /// <returns></returns>
         public string InputTemparatureTelemetry(TempTelemetryInput tempTelemetryInput)
         {
             var web3Srv = new Web3(BLOCK_CHAIN_URL);
@@ -100,6 +111,13 @@ namespace BlockChainSI.Services
             return string.Empty;
         }
 
+        /// <summary>
+        /// No UI for this method.
+        /// This method is used the list of temperature entries made for the given batches.
+        /// Helpful to debug in case batch is expected to be expired due to high temp entries, but unable to validate it.
+        /// </summary>
+        /// <param name="batchCode"></param>
+        /// <returns></returns>
         public TemperaturHistoryDao GetTemperaturHistorySync(byte[] batchCode)
         {
             try
@@ -108,10 +126,6 @@ namespace BlockChainSI.Services
                 contract = web3.Eth.GetContract(TEMPTELEMETRY_ABI, TEMPTELEMETRY_CONTRACT_ADDRESS);                                
                 var getTemperaturHistory = contract.GetFunction("getTemperaturHistory");
 
-                //var temperaturHistoryDetailsTask1 = getTemperaturHistory.CallDeserializingToObjectAsync<object>(batchCode);
-                //temperaturHistoryDetailsTask1.Wait();
-                //var tempResult = temperaturHistoryDetailsTask1.Result;
-
                 var temperaturHistoryDetailsTask = getTemperaturHistory.CallDeserializingToObjectAsync<TemperaturHistoryDao>(batchCode, 0);
                 temperaturHistoryDetailsTask.Wait();
                 return temperaturHistoryDetailsTask.Result;
@@ -119,7 +133,6 @@ namespace BlockChainSI.Services
             catch (Exception ex)
             {
                 string exmsg = ex.ToString();
-                //throw ex;
                 return null;
             }
         }

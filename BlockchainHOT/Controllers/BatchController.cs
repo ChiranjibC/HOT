@@ -11,8 +11,8 @@ namespace BlockchainHOT.Controllers
 {
     public class BatchController : BaseController
     {
-        private IBatch _batch;
-        public BatchController(IBatch batch)
+        private IBatchService _batch;
+        public BatchController(IBatchService batch)
         {
             _batch = batch;
         }

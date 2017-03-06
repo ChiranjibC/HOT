@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlockChainSI.Contracts
 {
-    public interface IOwnership
+    public interface IOwnershipService
     {
         IList<BatchOwnershipHistoryViewModel> GetOwnerShipDetails(int pageSize, int pageNo);
         IList<BatchOwnershipHistoryViewModel> GetOwnerShipDetails(int pageSize, int pageNo, string batchId);

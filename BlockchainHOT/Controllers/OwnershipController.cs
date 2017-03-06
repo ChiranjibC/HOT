@@ -10,8 +10,8 @@ namespace BlockchainHOT.Controllers
 {
     public class OwnershipController : Controller
     {
-        private IOwnership _ownership;
-        public OwnershipController(IOwnership ownership)
+        private IOwnershipService _ownership;
+        public OwnershipController(IOwnershipService ownership)
         {
             _ownership = ownership;
         }

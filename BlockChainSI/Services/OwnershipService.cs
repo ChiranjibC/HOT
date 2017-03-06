@@ -9,15 +9,15 @@ using BlockChainHot.Repository;
 using AutoMapper;
 using System.Web.Mvc;
 using BlockChainSI.Dao;
-using BlockChainSI.Services;
+using BlockChainSI.SIServices;
 using Nethereum.ABI.Encoders;
 
-namespace BlockChainSI.Mock
+namespace BlockChainSI.Services
 {
-    public class MockOwnership : MockData, IOwnership
+    public class OwnershipService : BaseService, IOwnershipService
     {
         private BlockChainHotDBContext dbContext;
-        public MockOwnership()
+        public OwnershipService()
         {
             dbContext = new BlockChainHotDBContext();
         }
@@ -162,7 +162,7 @@ namespace BlockChainSI.Mock
 
         private string AcknowledgeReceive(Batch batch, BatchOwnershipHistory batchOwnership)
         {
-            var batchService = new BatchService();
+            var batchService = new BatchSIService();
             var batchDao = GetBatchDao(batch);
             batchDao.SenderAddress = batchOwnership.OwnerCode;
             var status = string.Empty;
@@ -179,7 +179,7 @@ namespace BlockChainSI.Mock
 
         private string InitiateBatchTracking(Batch batch, BatchOwnershipHistory batchOwnership, List<StabilityRange> stabilityRanges)
         {
-            var batchService = new BatchService();
+            var batchService = new BatchSIService();
             var batchDao = GetBatchDao(batch, batchOwnership, stabilityRanges);            
             var status = string.Empty;
             try

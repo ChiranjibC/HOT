@@ -237,15 +237,6 @@
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\oldfiles\AccountController.cs" />
-    <Compile Include="Controllers\oldfiles\BaseController.cs" />
-    <Compile Include="Controllers\oldfiles\BatchController.cs" />
-    <Compile Include="Controllers\oldfiles\DeviceController.cs" />
-    <Compile Include="Controllers\oldfiles\HomeController.cs" />
-    <Compile Include="Controllers\oldfiles\LoggerController.cs" />
-    <Compile Include="Controllers\oldfiles\MapperController.cs" />
-    <Compile Include="Controllers\oldfiles\ProductController.cs" />
-    <Compile Include="Controllers\oldfiles\StabilityController.cs" />
     <Compile Include="Controllers\AllowedTempRangeController.cs" />
     <Compile Include="Controllers\TempTelemetryController.cs" />
     <Compile Include="Controllers\OwnershipController.cs" />
@@ -383,13 +374,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SiteJS\Batch.js" />
     <Content Include="Scripts\SiteJS\TempTelemetry.js" />
-    <Content Include="Scripts\_OldJSFiles\_OldBatchStability.js" />
     <Content Include="Scripts\SiteJS\partial\CommonPartial.js" />
-    <Content Include="Scripts\_OldJSFiles\_OldDeviceStability.js" />
     <Content Include="Scripts\SiteJS\Common.js" />
-    <Content Include="Scripts\_OldJSFiles\_OldStability.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="test.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -416,18 +403,8 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\_old\TempLogger\Index.cshtml" />
     <Content Include="Views\Batch\Index.cshtml" />
-    <Content Include="Views\_old\Stability\Index.cshtml" />
-    <Content Include="Views\_old\Product\Index.cshtml" />
-    <Content Include="Views\_old\Mapper\Index.cshtml" />
-    <Content Include="Views\_old\Logger\Index.cshtml" />
-    <Content Include="Views\_old\Product\Edit.cshtml" />
-    <Content Include="Views\_old\TempLogger\Edit.cshtml" />
     <Content Include="Views\Batch\Edit.cshtml" />
-    <Content Include="Views\_old\Mapper\Edit.cshtml" />
-    <Content Include="Views\_old\Logger\Edit.cshtml" />
-    <Content Include="Views\_old\Stability\StabilityList.cshtml" />
     <Content Include="Views\AllowedTempRange\Index.cshtml" />
     <Content Include="Views\OwnerShip\Edit.cshtml" />
     <Content Include="Views\OwnerShip\Index.cshtml" />
@@ -438,7 +415,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

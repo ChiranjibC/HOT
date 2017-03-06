@@ -11,8 +11,8 @@ namespace BlockchainHOT.Controllers
 {
     public class TempTelemetryController : Controller
     {
-        private ITempTelemetry _tempTelemetry;
-        public TempTelemetryController(ITempTelemetry tempTelemetry)
+        private ITempTelemetryService _tempTelemetry;
+        public TempTelemetryController(ITempTelemetryService tempTelemetry)
         {
             _tempTelemetry = tempTelemetry;
         }

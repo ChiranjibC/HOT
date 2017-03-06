@@ -18,22 +18,17 @@
 
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.BatchCode)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TempLogger)
         </th>
-        <th>
-            Tracked By
-            @*@Html.DisplayNameFor(model => model.CurrentOwner)*@
+        <th>            
+            @Html.DisplayNameFor(model => model.CurrentOwner)
         </th>
-        <th>
-            Linked By
-            @*@Html.DisplayNameFor(model => model.Producer)*@
+        <th>            
+            @Html.DisplayNameFor(model => model.Producer)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsExpired)
@@ -46,9 +41,6 @@
         foreach (var item in Model)
         {
             <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.BatchCode)
-                </td>*@
                 <td>
                     @Html.HiddenFor(modelItem => item.Id)
                     @Html.DisplayFor(modelItem => item.Description)
@@ -67,7 +59,6 @@
                 </td>
                 <td>
                     <a href="javascript:void(0);" class="editLink" data-url="@Url.Action("edit", "batch")" data-id="@item.BatchCode">Edit</a>
-                    @*<a href="javascript:void(0);" class="editLink" data-url="@Url.Action("delete", "batch")" data-id="@item.BatchCode">Delete</a>*@
                 </td>
                 <td>
                     <a href="javascript:void(0);" class="editLink badge" data-url="@Url.Action("index", "AllowedTempRange")" data-id="@item.BatchCode">Stability Range</a>

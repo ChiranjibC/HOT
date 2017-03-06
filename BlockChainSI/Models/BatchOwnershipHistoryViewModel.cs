@@ -25,13 +25,13 @@ namespace BlockChainSI.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Owner")]
+        [Display(Name = "Tracked By")]
         public string OwnerCode{ get; set; }
 
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Owner")]
+        [Display(Name = "Tracker")]
         public OwnerViewModel Owner { get; set; }
 
         [DataType(DataType.Text)]

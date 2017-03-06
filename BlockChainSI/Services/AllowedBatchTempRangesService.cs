@@ -8,12 +8,12 @@ using BlockChainSI.Models;
 using BlockChainHot.Repository;
 using AutoMapper;
 
-namespace BlockChainSI.Mock
+namespace BlockChainSI.Services
 {
-    public class MockAllowedTempRanges : IAllowedBatchTempRanges
+    public class AllowedBatchTempRangesService : BaseService, IAllowedBatchTempRangesService
     {
         private BlockChainHotDBContext dbContext;
-        public MockAllowedTempRanges()
+        public AllowedBatchTempRangesService()
         {
             dbContext = new BlockChainHotDBContext();
         }

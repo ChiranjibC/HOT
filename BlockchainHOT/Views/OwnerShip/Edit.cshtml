@@ -23,7 +23,7 @@
                 @Html.DropDownListFor(model => model.BatchCode, Model.BatchList, Model.BatchCode, new { @class = "form-control" }) 
                 <div>
                     <small>
-                        <i>*Only untracked Batches are listed, use Change Tracker option for Batches already Tracked.</i>
+                        <i>*Only untracked Batches are listed, use Change Tracker option for Batches already tracked.</i>
                     </small>
                 </div>
                 @Html.ValidationMessageFor(model => model.BatchCode, "", new { @class = "text-danger" })
@@ -35,36 +35,19 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Batch.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Batch.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="form-control-static">@Html.DisplayFor(model => model.Batch.Description)</p>
                     @Html.HiddenFor(model => model.BatchCode)
                 </div>
             </div>
         }
 
         <div class="form-group">
-            <label class="control-label col-md-2">Tracked By</label>
-            @*@Html.LabelFor(model => model.OwnerCode, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.LabelFor(model => model.OwnerCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.OwnerCode, Model.OwnerList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OwnerCode, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-        
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="panel-footer text-center">
             <button type="button" id="btnClose" class="btn">Close</button>

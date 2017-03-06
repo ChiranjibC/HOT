@@ -23,25 +23,15 @@
         </div>
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.TempLoggerCode, htmlAttributes: new { @class = "control-label col-md-4" })*@
-            <label class="control-label col-md-4">Link Temperature Logger</label>
+            @Html.LabelFor(model => model.TempLoggerCode, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-6">
                 @Html.DropDownListFor(model => model.TempLoggerCode, Model.TempLoggerList, "-- Select --", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TempLoggerCode, "", new { @class = "text-danger" })
             </div>
         </div>        
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CurrentOwnerCode, htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-6">
-                @Html.DropDownListFor(model => model.CurrentOwnerCode, Model.OwnerList, "-- Select --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CurrentOwnerCode, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
         <div class="form-group">
-            @*@Html.LabelFor(model => model.ProducerCode, htmlAttributes: new { @class = "control-label col-md-4" })*@
-            <label class="control-label col-md-4">Linked By</label>
+            @Html.LabelFor(model => model.ProducerCode, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="control-label col-md-4">
                 @Html.DropDownListFor(model => model.ProducerCode, Model.OwnerList, "-- Select --", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ProducerCode, "", new { @class = "text-danger" })

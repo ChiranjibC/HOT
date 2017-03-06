@@ -8,17 +8,17 @@ using BlockChainSI.Models;
 using BlockChainHot.Repository;
 using AutoMapper;
 using System.Web.Mvc;
-using BlockChainSI.Services;
+using BlockChainSI.SIServices;
 using BlockChainSI.Dao;
 using Nethereum.ABI.Encoders;
 using System.Data;
 
-namespace BlockChainSI.Mock
+namespace BlockChainSI.Services
 {
-    public class MockTempTelemetry : MockData, ITempTelemetry
+    public class TempTelemetryService : BaseService, ITempTelemetryService
     {
         private BlockChainHotDBContext dbContext;
-        public MockTempTelemetry()
+        public TempTelemetryService()
         {
             dbContext = new BlockChainHotDBContext();
         }
@@ -114,7 +114,7 @@ namespace BlockChainSI.Mock
         private string InitiateTempTelemetry(Batch batch, TemparatureTelemetry tempTelemetrydb)
         {
             var status = string.Empty;
-            var tempTelemetryService = new TemperatureTelemetryService();
+            var tempTelemetryService = new TemperatureTelemetrySIService();
 
             var tempTelemetryDao = GetTempTelemetryDao(batch, tempTelemetrydb);
             try

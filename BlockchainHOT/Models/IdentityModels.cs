@@ -12,14 +12,6 @@ namespace BlockchainHOT.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-        }
-
-        public System.Data.Entity.DbSet<BlockChainSI.Models.TempLoggerViewModel> TempLoggerViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<BlockChainSI.Models.BatchViewModel> BatchViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<BlockChainSI.Models.ProductViewModel> ProductViewModels { get; set; }
-
-        public System.Data.Entity.DbSet<BlockChainSI.Models.StabilityChartViewModel> StabilityChartViewModels { get; set; }
+        }        
     }
 }

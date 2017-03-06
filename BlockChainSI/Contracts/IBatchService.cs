@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlockChainSI.Contracts
 {
-    public interface IBatch
+    public interface IBatchService
     {
         IEnumerable<BatchViewModel> GetBatchItems(int pageSize, int pageNo);
         BatchViewModel UpdateBatch(BatchViewModel batch);

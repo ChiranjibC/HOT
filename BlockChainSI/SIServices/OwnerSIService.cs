@@ -6,19 +6,29 @@ using System.Web;
 using Nethereum.Hex.HexTypes;
 using Nethereum.Web3;
 
-namespace BlockChainSI.Services
+namespace BlockChainSI.SIServices
 {
-    public class OwnerService : BaseService
+    /// <summary>
+    /// Owner System Interface service to connect to Block Chain
+    /// </summary>
+    public class OwnerSIService : BaseSIService
     {
         private readonly Web3 web3;        
         
         private Contract contract;
-        public OwnerService(Web3 web3, string address)
+        public OwnerSIService(Web3 web3, string address)
         {
             this.web3 = web3;
             this.contract = web3.Eth.GetContract(OWNER_ABI, address);
         }
 
+        /// <summary>
+        /// This method is used to check if the given address is already registered
+        /// in block chain as valid owner (used for initial debugging purpose, as only registered 
+        /// owner address can be used as Manufacturer, Shipper, Site, Logger etc.) (No UI as of now).
+        /// </summary>
+        /// <param name="_ownerId"></param>
+        /// <returns></returns>
         public async Task<bool> IsValidOwner(string _ownerId)
         {
             try
