@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockchainHOT", "BlockchainHOT\BlockchainHOT.csproj", "{736C952D-2218-4152-B02C-77A95F5A2A56}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockChainHot.Repository", "BlockChainHot.Repository\BlockChainHot.Repository.csproj", "{BE52EBF2-DC07-4AA2-A5C0-50E6A03A6E19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockChainConsole", "BlockChainConsole\BlockChainConsole.csproj", "{85EC6C9B-B807-4DEA-A6EB-C85FFA69E80F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockChainCreateDeviceIdentity_Console", "BlockChainCreateDeviceIdentity_Console\BlockChainCreateDeviceIdentity_Console.csproj", "{581CE3F9-DE6E-46A2-B3FC-85FAC8658B73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCReadDeviceToCloudMessages_Console", "BCReadDeviceToCloudMessages_Console\BCReadDeviceToCloudMessages_Console.csproj", "{4F99FEA0-F3B9-44F1-B980-F5034793D54D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCSimulatedDevice_Console", "BCSimulatedDevice_Console\BCSimulatedDevice_Console.csproj", "{13A1182F-2EAC-4577-99C5-64B517EAB023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{85EC6C9B-B807-4DEA-A6EB-C85FFA69E80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85EC6C9B-B807-4DEA-A6EB-C85FFA69E80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85EC6C9B-B807-4DEA-A6EB-C85FFA69E80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581CE3F9-DE6E-46A2-B3FC-85FAC8658B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581CE3F9-DE6E-46A2-B3FC-85FAC8658B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581CE3F9-DE6E-46A2-B3FC-85FAC8658B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581CE3F9-DE6E-46A2-B3FC-85FAC8658B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F99FEA0-F3B9-44F1-B980-F5034793D54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F99FEA0-F3B9-44F1-B980-F5034793D54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F99FEA0-F3B9-44F1-B980-F5034793D54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F99FEA0-F3B9-44F1-B980-F5034793D54D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A1182F-2EAC-4577-99C5-64B517EAB023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A1182F-2EAC-4577-99C5-64B517EAB023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A1182F-2EAC-4577-99C5-64B517EAB023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A1182F-2EAC-4577-99C5-64B517EAB023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
