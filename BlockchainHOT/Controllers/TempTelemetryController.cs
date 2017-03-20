@@ -68,5 +68,37 @@ namespace BlockchainHOT.Controllers
                 return View("Index", tempTelemetryList);
             }
         }
+
+        [HttpGet]
+        public ActionResult Receiver(string batchId, int temperature)
+        {
+            try
+            {
+                var tempTelemetryViewModel = new TemparatureTelemetryViewModel()
+                {
+                    BatchCode = batchId,
+                    Temperature = temperature,
+                };
+                var updatedStatus = _tempTelemetry.Update(tempTelemetryViewModel);
+                return Json(new { success = string.IsNullOrEmpty(updatedStatus), message = updatedStatus }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult GetActiveBatchList(string Id)
+        {            
+            try
+            {
+                var tempTelemetry = _tempTelemetry.Get();
+                return Json( tempTelemetry.BatchList.Select(x => x.Value).ToList(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new List<string>(), JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
