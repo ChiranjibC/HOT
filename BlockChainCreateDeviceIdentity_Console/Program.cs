@@ -11,7 +11,7 @@ namespace BlockChainCreateDeviceIdentity_Console
     public class Program
     {
         static RegistryManager registryManager;
-        static string connectionString = "HostName=BCHOT.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=cfQpRzah51/5afF5JqwHwGuKO1uQXg3Ftl2U4ax6XNU=";
+        static string connectionString = "HostName=HotSmartIOT.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=Ev5CqXNjzwV2jNlA4/+KU42cGb0EFhl2XZGhHqMp79g=";
 
         public static void Main(string[] args)
         {

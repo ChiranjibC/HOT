@@ -35,7 +35,7 @@ namespace BCDeviceMoc_Console
             Console.WriteLine("Simulated device\n");
             _deviceClient = DeviceClient.Create(iotHubEndPointUri, 
                                                new DeviceAuthenticationWithRegistrySymmetricKey(_deviceName, _deviceKey), 
-                                               Microsoft.Azure.Devices.Client.TransportType.Mqtt);
+                                               Microsoft.Azure.Devices.Client.TransportType.Http1);
 
             SendDeviceToCloudMessagesAsync();
             Console.ReadLine();
@@ -44,11 +44,13 @@ namespace BCDeviceMoc_Console
         private static async void SendDeviceToCloudMessagesAsync()
         {
             Random rand = new Random();
-            int cnt = 0, maxCnt = 1;
+            int cnt = 0, maxCnt = 10;
             //while (true)
             while (cnt < maxCnt)
             {
                 cnt++;
+                Console.WriteLine("Starting to send Mock temp at: {0} Try Count: {1}", DateTime.Now, cnt);
+                Console.WriteLine("_____________________________________________________________________");
                 foreach (var batchItem in GetBCActiveBatchList())
                 {
 
@@ -67,7 +69,8 @@ namespace BCDeviceMoc_Console
                     await _deviceClient.SendEventAsync(message);
                     Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
                 }
-                Task.Delay(60 * 1000).Wait(); //repeat in a minute, if in while (true) loop
+                Task.Delay(15 * 1000).Wait(); //repeat in 2 minute, if in while (true) loop
+                
             }
         }
         
@@ -76,16 +79,18 @@ namespace BCDeviceMoc_Console
             try
             {
                 var sendrequesturl = ConfigurationManager.AppSettings["BlockChainWebUrl"] as string;
-                
+                Console.WriteLine("Starting to get Active Batchlist, Url: {0}", sendrequesturl);
 
                 var request = (HttpWebRequest)WebRequest.Create(sendrequesturl);
                 var response = (HttpWebResponse)request.GetResponse();
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();                
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                Console.WriteLine("Response for Active Batchlist, Data: $${0}$$", responseString);
                 var batchList = JsonConvert.DeserializeObject<IList<string>>(responseString);                
                 return batchList;
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Exception while getting Active Batchlist: {0}", ex);
                 return new List<string>();
             }
         }

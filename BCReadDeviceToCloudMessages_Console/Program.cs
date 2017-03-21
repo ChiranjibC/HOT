@@ -49,12 +49,20 @@ namespace BCReadDeviceToCloudMessages_Console
         private static async Task ReceiveMessagesFromDeviceAsync(string partition, CancellationToken ct)
         {
             var eventHubReceiver = eventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
-            while (true)
+            int cnt = 0, maxCnt = 10;
+            //while (true)
+            while (cnt < maxCnt)
             {
+                cnt++;
+
                 if (ct.IsCancellationRequested) break;
                 EventData eventData = await eventHubReceiver.ReceiveAsync();
-                if (eventData == null) continue;
-
+                if (eventData == null)
+                {
+                    Console.WriteLine("No Messages to be processed at: {0} Try Count:{1}", DateTime.Now, cnt);
+                    Task.Delay(120 * 1000).Wait(); //repeat in 2 minute, if in while (true) loop
+                    continue;
+                }
                 string data = Encoding.UTF8.GetString(eventData.GetBytes());
                 var responseData = await ProcessTelemetryData(data);
                 Console.WriteLine("Message received. Partition: {0} Data: '{1}'", partition, data);
