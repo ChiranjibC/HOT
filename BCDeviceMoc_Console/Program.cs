@@ -38,7 +38,10 @@ namespace BCDeviceMoc_Console
                                                Microsoft.Azure.Devices.Client.TransportType.Http1);
 
             SendDeviceToCloudMessagesAsync();
-            Console.ReadLine();
+            //Console.ReadLine(); //blocks the process when running from Azure webjobs
+            Console.WriteLine("");
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("Exiting send Mock temp at: {0}", DateTime.Now);
         }
 
         private static async void SendDeviceToCloudMessagesAsync()
