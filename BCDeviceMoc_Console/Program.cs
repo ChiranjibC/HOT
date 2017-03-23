@@ -12,6 +12,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
 using System.Dynamic;
+using System.Threading;
 
 namespace BCDeviceMoc_Console
 {
@@ -37,20 +38,33 @@ namespace BCDeviceMoc_Console
                                                new DeviceAuthenticationWithRegistrySymmetricKey(_deviceName, _deviceKey), 
                                                Microsoft.Azure.Devices.Client.TransportType.Http1);
 
-            SendDeviceToCloudMessagesAsync();
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            System.Console.CancelKeyPress += (s, e) =>
+            {
+                e.Cancel = true;
+                cts.Cancel();
+                Console.WriteLine("Cancel job requested. Exiting...");
+            };
+
+            Task sendMockDataTask = SendDeviceToCloudMessagesAsync(cts.Token);
+            Task.WaitAll(sendMockDataTask);            
+
             //Console.ReadLine(); //blocks the process when running from Azure webjobs
             Console.WriteLine("");
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("Exiting send Mock temp at: {0}", DateTime.Now);
         }
 
-        private static async void SendDeviceToCloudMessagesAsync()
+        private static async Task SendDeviceToCloudMessagesAsync(CancellationToken ct)
         {
             Random rand = new Random();
             int cnt = 0, maxCnt = 10;
             //while (true)
             while (cnt < maxCnt)
             {
+                if (ct.IsCancellationRequested) break;
+
                 cnt++;
                 Console.WriteLine("Starting to send Mock temp at: {0} Try Count: {1}", DateTime.Now, cnt);
                 Console.WriteLine("_____________________________________________________________________");
